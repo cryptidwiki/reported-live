@@ -15,13 +15,9 @@
   --text2: rgba(232,234,240,0.55);
   --text3: rgba(232,234,240,0.28);
   --red: #ff2d2d;
-  --red2: rgba(255,45,45,0.15);
   --amber: #ffaa00;
-  --amber2: rgba(255,170,0,0.12);
   --green: #00ff88;
-  --green2: rgba(0,255,136,0.1);
   --blue: #00aaff;
-  --blue2: rgba(0,170,255,0.1);
   --purple: #aa44ff;
   --border: rgba(232,234,240,0.08);
   --border2: rgba(232,234,240,0.15);
@@ -29,7 +25,6 @@
   --display: 'Rajdhani', sans-serif;
   --condensed: 'Barlow Condensed', sans-serif;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -40,8 +35,6 @@ body {
   overflow-x: hidden;
   cursor: crosshair;
 }
-
-/* Scanlines */
 body::before {
   content: '';
   position: fixed;
@@ -51,377 +44,103 @@ body::before {
   z-index: 9999;
 }
 
-/* ── ALERT BAR ── */
-.alert-bar {
-  background: var(--red);
-  padding: 6px 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-.alert-bar-label {
-  font-family: var(--condensed);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  color: #000;
-  white-space: nowrap;
-  flex-shrink: 0;
-  background: rgba(0,0,0,0.2);
-  padding: 2px 8px;
-}
-.alert-bar-ticker {
-  display: flex;
-  overflow: hidden;
-  flex: 1;
-}
-.alert-bar-text {
-  font-size: 11px;
-  font-family: var(--condensed);
-  font-weight: 500;
-  color: #000;
-  white-space: nowrap;
-  animation: ticker 25s linear infinite;
-  letter-spacing: 0.05em;
-}
+/* ALERT BAR */
+.alert-bar { background: var(--red); padding: 5px 1.5rem; display: flex; align-items: center; gap: 1rem; overflow: hidden; }
+.alert-bar-label { font-family: var(--condensed); font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: #000; white-space: nowrap; flex-shrink: 0; background: rgba(0,0,0,0.2); padding: 2px 8px; }
+.alert-bar-ticker { display: flex; overflow: hidden; flex: 1; }
+.alert-bar-text { font-size: 11px; font-family: var(--condensed); font-weight: 500; color: #000; white-space: nowrap; animation: ticker 30s linear infinite; letter-spacing: 0.05em; }
 @keyframes ticker { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-.alert-bar-time {
-  font-size: 10px;
-  font-family: var(--mono);
-  color: rgba(0,0,0,0.6);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.alert-bar-time { font-size: 10px; font-family: var(--mono); color: rgba(0,0,0,0.6); white-space: nowrap; flex-shrink: 0; }
 
-/* ── HEADER ── */
-.site-header {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border2);
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
+/* HEADER */
+.site-header { background: var(--bg2); border-bottom: 1px solid var(--border2); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 2rem; position: sticky; top: 0; z-index: 100; }
 .logo-wrap { display: flex; flex-direction: column; line-height: 1; }
-.logo-live {
-  font-size: 9px;
-  letter-spacing: 0.3em;
-  color: var(--red);
-  font-family: var(--mono);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 2px;
-}
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--red);
-  animation: livepulse 1.5s ease-in-out infinite;
-}
+.logo-live { font-size: 9px; letter-spacing: 0.3em; color: var(--red); font-family: var(--mono); display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: livepulse 1.5s ease-in-out infinite; }
 @keyframes livepulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
-.logo-title {
-  font-family: var(--condensed);
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--text);
-  line-height: 1;
-}
+.logo-title { font-family: var(--condensed); font-size: 32px; font-weight: 700; letter-spacing: 0.08em; color: var(--text); line-height: 1; }
 .logo-title span { color: var(--red); }
 .logo-sub { font-size: 9px; letter-spacing: 0.2em; color: var(--text3); margin-top: 3px; }
-
-.header-stats {
-  display: flex;
-  gap: 2rem;
-  margin-left: auto;
-}
+.header-stats { display: flex; gap: 2rem; margin-left: auto; }
 .hstat { display: flex; flex-direction: column; align-items: flex-end; }
-.hstat-num {
-  font-family: var(--condensed);
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1;
-}
+.hstat-num { font-family: var(--condensed); font-size: 22px; font-weight: 600; line-height: 1; }
 .hstat-num.red { color: var(--red); }
 .hstat-num.amber { color: var(--amber); }
 .hstat-num.green { color: var(--green); }
 .hstat-label { font-size: 8px; letter-spacing: 0.18em; color: var(--text3); margin-top: 2px; }
-
-.header-report-btn {
-  font-family: var(--condensed);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  padding: 10px 24px;
-  background: var(--red);
-  color: #000;
-  border: none;
-  cursor: pointer;
-  transition: all 0.15s;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.header-report-btn { font-family: var(--condensed); font-size: 13px; font-weight: 700; letter-spacing: 0.15em; padding: 10px 24px; background: var(--red); color: #000; border: none; cursor: pointer; transition: all 0.15s; text-decoration: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; flex-shrink: 0; }
 .header-report-btn:hover { background: #ff5555; transform: translateY(-1px); }
 .header-report-btn::before { content: '+'; font-size: 18px; font-weight: 300; }
 
-/* ── FILTER BAR ── */
-.filter-bar {
-  background: var(--bg3);
-  border-bottom: 1px solid var(--border);
-  padding: 0.6rem 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 69px;
-  z-index: 90;
-}
-.filter-label { font-size: 9px; letter-spacing: 0.2em; color: var(--text3); white-space: nowrap; }
-.filter-btn {
-  font-family: var(--condensed);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  padding: 4px 14px;
-  border: 1px solid var(--border2);
-  background: transparent;
-  color: var(--text2);
-  cursor: pointer;
-  transition: all 0.12s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+/* FILTER BAR */
+.filter-bar { background: var(--bg3); border-bottom: 1px solid var(--border); padding: 0.6rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; position: sticky; top: 69px; z-index: 90; }
+.filter-label { font-size: 9px; letter-spacing: 0.2em; color: var(--text3); white-space: nowrap; margin-right: 4px; }
+.filter-btn { font-family: var(--condensed); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
 .filter-btn:hover { border-color: var(--text); color: var(--text); }
 .filter-btn.active { color: #000; border-color: transparent; }
 .filter-btn.all.active { background: var(--text); }
 .filter-btn.cryptid.active { background: var(--amber); }
 .filter-btn.ghost.active { background: #8888ff; }
-.filter-btn.ufo.active { background: var(--green); color: #000; }
-.filter-btn.alien.active { background: #44ffaa; color: #000; }
+.filter-btn.ufo.active { background: var(--green); }
+.filter-btn.alien.active { background: #44ffaa; }
 .filter-btn.unexplained.active { background: var(--blue); }
 .filter-btn.demonic.active { background: var(--red); }
 .filter-btn.humanoid.active { background: var(--purple); }
-.filter-btn.atmospheric.active { background: #ffdd44; color: #000; }
-.filter-btn.other.active { background: var(--text2); color: #000; }
+.filter-btn.atmospheric.active { background: #ffdd44; }
+.filter-btn.other.active { background: var(--text2); }
 .filter-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
-/* ── MAIN LAYOUT ── */
-.main-layout {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  height: calc(100vh - 112px);
-}
+/* MAIN LAYOUT */
+.main-layout { display: grid; grid-template-columns: 1fr 380px; height: calc(100vh - 108px); }
 
-/* ── MAP ── */
-.map-section {
-  position: relative;
-  background: var(--bg);
-  overflow: hidden;
-  border-right: 1px solid var(--border2);
-}
-
-.map-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 0.75rem 1rem;
-  background: linear-gradient(to bottom, rgba(5,6,8,0.95), transparent);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.map-title {
-  font-family: var(--condensed);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--amber);
-}
+/* MAP */
+.map-section { position: relative; background: var(--bg); overflow: hidden; border-right: 1px solid var(--border2); }
+.map-header { position: absolute; top: 0; left: 0; right: 0; padding: 0.75rem 1rem; background: linear-gradient(to bottom, rgba(5,6,8,0.95), transparent); z-index: 10; display: flex; align-items: center; justify-content: space-between; }
+.map-title { font-family: var(--condensed); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--amber); }
 .map-hint { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; }
+#map-svg-container { width: 100%; height: 100%; }
+#map-svg-container svg { width: 100%; height: 100%; }
 
-.map-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
+/* State styles */
+.state { fill: #0a1220; stroke: #1a2840; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.state:hover { fill: #162035; }
+.state.active { fill: #1a2840; stroke: var(--amber); stroke-width: 1; }
 
-/* US SVG Map */
-#us-map {
-  width: 100%;
-  height: 100%;
-}
-
-.state-path {
-  fill: #0d1520;
-  stroke: #1a2535;
-  stroke-width: 1;
-  cursor: pointer;
-  transition: fill 0.15s;
-}
-.state-path:hover { fill: #162030; }
-.state-path.has-reports { fill: #101820; }
-.state-path.active { fill: #162535; stroke: var(--amber); stroke-width: 1.5; }
-
-/* Map Pins */
-.map-pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  z-index: 20;
-}
-.pin-outer {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.15s;
-}
-.map-pin:hover .pin-outer { transform: scale(1.5); }
+/* Pins */
+.map-pin { cursor: pointer; position: absolute; transform: translate(-50%, -50%); z-index: 20; }
+.pin-outer { width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; transition: transform 0.15s; }
+.map-pin:hover .pin-outer { transform: scale(1.6); }
 .pin-inner { width: 6px; height: 6px; border-radius: 50%; }
-.pin-ring {
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid;
-  opacity: 0.4;
-  animation: pinring 2s ease-out infinite;
-}
-@keyframes pinring { 0%{transform:scale(1);opacity:0.4;} 100%{transform:scale(2.5);opacity:0;} }
-
-.pin-cryptid .pin-outer { background: rgba(255,170,0,0.2); }
-.pin-cryptid .pin-inner { background: var(--amber); }
-.pin-cryptid .pin-ring { border-color: var(--amber); }
-.pin-ghost .pin-outer { background: rgba(136,136,255,0.2); }
-.pin-ghost .pin-inner { background: #8888ff; }
-.pin-ghost .pin-ring { border-color: #8888ff; }
-.pin-ufo .pin-outer { background: rgba(0,255,136,0.2); }
-.pin-ufo .pin-inner { background: var(--green); }
-.pin-ufo .pin-ring { border-color: var(--green); }
-.pin-alien .pin-outer { background: rgba(68,255,170,0.2); }
-.pin-alien .pin-inner { background: #44ffaa; }
-.pin-alien .pin-ring { border-color: #44ffaa; }
-.pin-unexplained .pin-outer { background: rgba(0,170,255,0.2); }
-.pin-unexplained .pin-inner { background: var(--blue); }
-.pin-unexplained .pin-ring { border-color: var(--blue); }
-.pin-demonic .pin-outer { background: rgba(255,45,45,0.2); }
-.pin-demonic .pin-inner { background: var(--red); }
-.pin-demonic .pin-ring { border-color: var(--red); }
-.pin-humanoid .pin-outer { background: rgba(170,68,255,0.2); }
-.pin-humanoid .pin-inner { background: var(--purple); }
-.pin-humanoid .pin-ring { border-color: var(--purple); }
-.pin-atmospheric .pin-outer { background: rgba(255,221,68,0.2); }
-.pin-atmospheric .pin-inner { background: #ffdd44; }
-.pin-atmospheric .pin-ring { border-color: #ffdd44; }
-.pin-other .pin-outer { background: rgba(232,234,240,0.15); }
-.pin-other .pin-inner { background: var(--text2); }
-.pin-other .pin-ring { border-color: var(--text2); }
-
-.pin-tooltip {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(5,6,8,0.95);
-  border: 1px solid var(--border2);
-  padding: 5px 10px;
-  font-size: 9px;
-  font-family: var(--mono);
-  color: var(--text);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s;
-  letter-spacing: 0.05em;
-}
+.pin-ring { position: absolute; inset: -4px; border-radius: 50%; border: 1px solid; opacity: 0.4; animation: pinring 2s ease-out infinite; }
+@keyframes pinring { 0%{transform:scale(1);opacity:0.4;} 100%{transform:scale(2.8);opacity:0;} }
+.pin-tooltip { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(5,6,8,0.95); border: 1px solid var(--border2); padding: 4px 10px; font-size: 9px; font-family: var(--mono); color: var(--text); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; letter-spacing: 0.05em; z-index: 30; }
 .map-pin:hover .pin-tooltip { opacity: 1; }
 
+/* Category colors */
+.cat-cryptid .pin-outer { background: rgba(255,170,0,0.2); } .cat-cryptid .pin-inner { background: var(--amber); } .cat-cryptid .pin-ring { border-color: var(--amber); }
+.cat-ghost .pin-outer { background: rgba(136,136,255,0.2); } .cat-ghost .pin-inner { background: #8888ff; } .cat-ghost .pin-ring { border-color: #8888ff; }
+.cat-ufo .pin-outer { background: rgba(0,255,136,0.2); } .cat-ufo .pin-inner { background: var(--green); } .cat-ufo .pin-ring { border-color: var(--green); }
+.cat-alien .pin-outer { background: rgba(68,255,170,0.2); } .cat-alien .pin-inner { background: #44ffaa; } .cat-alien .pin-ring { border-color: #44ffaa; }
+.cat-unexplained .pin-outer { background: rgba(0,170,255,0.2); } .cat-unexplained .pin-inner { background: var(--blue); } .cat-unexplained .pin-ring { border-color: var(--blue); }
+.cat-demonic .pin-outer { background: rgba(255,45,45,0.2); } .cat-demonic .pin-inner { background: var(--red); } .cat-demonic .pin-ring { border-color: var(--red); }
+.cat-humanoid .pin-outer { background: rgba(170,68,255,0.2); } .cat-humanoid .pin-inner { background: var(--purple); } .cat-humanoid .pin-ring { border-color: var(--purple); }
+.cat-atmospheric .pin-outer { background: rgba(255,221,68,0.2); } .cat-atmospheric .pin-inner { background: #ffdd44; } .cat-atmospheric .pin-ring { border-color: #ffdd44; }
+.cat-other .pin-outer { background: rgba(232,234,240,0.15); } .cat-other .pin-inner { background: var(--text2); } .cat-other .pin-ring { border-color: var(--text2); }
+
 /* Map legend */
-.map-legend {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  background: rgba(5,6,8,0.88);
-  border: 1px solid var(--border2);
-  padding: 0.75rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 1rem;
-  z-index: 10;
-}
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 9px; color: var(--text3); letter-spacing: 0.08em; }
-.legend-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.map-legend { position: absolute; bottom: 1rem; left: 1rem; background: rgba(5,6,8,0.9); border: 1px solid var(--border2); padding: 0.6rem 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 1rem; z-index: 10; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 8px; color: var(--text3); letter-spacing: 0.08em; }
+.legend-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
-/* ── FEED PANEL ── */
-.feed-panel {
-  background: var(--bg2);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.feed-header {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-}
-.feed-title {
-  font-family: var(--condensed);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--text);
-}
-.feed-count {
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 0.1em;
-}
-
-.feed-list {
-  flex: 1;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border2) transparent;
-}
-
-.feed-item {
-  padding: 0.9rem 1rem;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background 0.1s;
-  position: relative;
-}
+/* FEED */
+.feed-panel { background: var(--bg2); display: flex; flex-direction: column; overflow: hidden; }
+.feed-header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.feed-title { font-family: var(--condensed); font-size: 13px; font-weight: 700; letter-spacing: 0.15em; }
+.feed-count { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; }
+.feed-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
+.feed-item { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; position: relative; padding-left: 1.25rem; }
 .feed-item:hover { background: var(--bg3); }
-.feed-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-}
+.feed-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; }
 .feed-item.cryptid::before { background: var(--amber); }
 .feed-item.ghost::before { background: #8888ff; }
 .feed-item.ufo::before { background: var(--green); }
@@ -431,377 +150,107 @@ body::before {
 .feed-item.humanoid::before { background: var(--purple); }
 .feed-item.atmospheric::before { background: #ffdd44; }
 .feed-item.other::before { background: var(--text2); }
+.feed-item-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
+.feed-cat { font-family: var(--condensed); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+.feed-cat.cryptid { color: var(--amber); }
+.feed-cat.ghost { color: #8888ff; }
+.feed-cat.ufo { color: var(--green); }
+.feed-cat.alien { color: #44ffaa; }
+.feed-cat.unexplained { color: var(--blue); }
+.feed-cat.demonic { color: var(--red); }
+.feed-cat.humanoid { color: var(--purple); }
+.feed-cat.atmospheric { color: #ffdd44; }
+.feed-cat.other { color: var(--text2); }
+.feed-date { font-size: 9px; color: var(--text3); }
+.feed-location { font-size: 10px; color: var(--text2); margin-bottom: 4px; }
+.feed-desc { font-size: 11px; line-height: 1.5; color: var(--text3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.feed-img { width: 100%; height: 75px; object-fit: cover; margin-top: 7px; opacity: 0.7; }
+.feed-status { display: inline-block; font-size: 8px; letter-spacing: 0.12em; padding: 2px 6px; border: 1px solid; margin-top: 5px; }
+.feed-status.pending { border-color: var(--amber); color: var(--amber); }
+.feed-status.verified { border-color: var(--green); color: var(--green); }
+.feed-status.unverified { border-color: var(--text3); color: var(--text3); }
 
-.feed-item-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-}
-.feed-item-cat {
-  font-family: var(--condensed);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-.feed-item-cat.cryptid { color: var(--amber); }
-.feed-item-cat.ghost { color: #8888ff; }
-.feed-item-cat.ufo { color: var(--green); }
-.feed-item-cat.alien { color: #44ffaa; }
-.feed-item-cat.unexplained { color: var(--blue); }
-.feed-item-cat.demonic { color: var(--red); }
-.feed-item-cat.humanoid { color: var(--purple); }
-.feed-item-cat.atmospheric { color: #ffdd44; }
-.feed-item-cat.other { color: var(--text2); }
-.feed-item-date { font-size: 9px; color: var(--text3); letter-spacing: 0.08em; }
-.feed-item-location { font-size: 10px; color: var(--text2); margin-bottom: 5px; }
-.feed-item-desc {
-  font-size: 11px;
-  line-height: 1.6;
-  color: var(--text3);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.feed-item-img {
-  width: 100%;
-  height: 80px;
-  object-fit: cover;
-  margin-top: 8px;
-  opacity: 0.7;
-}
-.feed-item-status {
-  display: inline-block;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  padding: 2px 6px;
-  border: 1px solid;
-  margin-top: 6px;
-  font-family: var(--mono);
-}
-.feed-item-status.pending { border-color: var(--amber); color: var(--amber); }
-.feed-item-status.verified { border-color: var(--green); color: var(--green); }
-.feed-item-status.unverified { border-color: var(--text3); color: var(--text3); }
-
-/* ── REPORT MODAL ── */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
+/* DETAIL MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
 .modal-overlay.open { display: flex; }
-.modal {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  width: min(640px, 100%);
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: modalIn 0.2s ease;
-}
+.detail-modal { background: var(--bg2); border: 1px solid var(--border2); width: min(600px,100%); max-height: 90vh; overflow-y: auto; animation: modalIn 0.2s ease; }
 @keyframes modalIn { from{opacity:0;transform:scale(0.97);} to{opacity:1;transform:scale(1);} }
-.modal-header {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  background: var(--bg2);
-  z-index: 10;
-}
-.modal-title {
-  font-family: var(--condensed);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-.modal-close {
-  background: transparent;
-  border: 1px solid var(--border2);
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 10px;
-  padding: 4px 12px;
-  cursor: pointer;
-  transition: all 0.12s;
-  letter-spacing: 0.1em;
-}
-.modal-close:hover { border-color: var(--red); color: var(--red); }
-.modal-body { padding: 1.5rem; }
-
-/* Detail modal */
-.detail-modal {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  width: min(580px, 100%);
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: modalIn 0.2s ease;
-}
-.detail-img {
-  width: 100%;
-  max-height: 280px;
-  object-fit: cover;
-  opacity: 0.85;
-}
+.detail-img { width: 100%; max-height: 260px; object-fit: cover; opacity: 0.85; display: block; }
 .detail-body { padding: 1.5rem; }
-.detail-cat {
-  font-family: var(--condensed);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  margin-bottom: 6px;
-}
-.detail-title {
-  font-family: var(--condensed);
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
-  line-height: 1.1;
-}
+.detail-cat { font-family: var(--condensed); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; margin-bottom: 5px; }
+.detail-title { font-family: var(--condensed); font-size: 24px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 8px; line-height: 1.15; }
 .detail-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.detail-meta-item { display: flex; flex-direction: column; }
-.detail-meta-label { font-size: 8px; letter-spacing: 0.2em; color: var(--text3); margin-bottom: 2px; }
+.detail-meta-label { font-size: 8px; letter-spacing: 0.18em; color: var(--text3); margin-bottom: 2px; }
 .detail-meta-val { font-size: 11px; color: var(--text2); }
 .detail-desc { font-size: 13px; line-height: 1.8; color: var(--text2); margin-bottom: 1rem; }
-.detail-status-badge {
-  display: inline-block;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  padding: 4px 12px;
-  border: 1px solid;
-  font-family: var(--mono);
-}
-.detail-status-badge.pending { border-color: var(--amber); color: var(--amber); background: var(--amber2); }
-.detail-status-badge.verified { border-color: var(--green); color: var(--green); background: var(--green2); }
-.detail-status-badge.unverified { border-color: var(--text3); color: var(--text3); }
+.detail-badge { display: inline-block; font-size: 9px; letter-spacing: 0.15em; padding: 4px 12px; border: 1px solid; font-family: var(--mono); margin-bottom: 1rem; }
+.detail-badge.pending { border-color: var(--amber); color: var(--amber); background: rgba(255,170,0,0.08); }
+.detail-badge.verified { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.08); }
+.detail-badge.unverified { border-color: var(--text3); color: var(--text3); }
+.detail-close-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--border2); color: var(--text2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; cursor: pointer; transition: all 0.12s; }
+.detail-close-btn:hover { border-color: var(--red); color: var(--red); }
 
-/* ── MOBILE ── */
+/* MOBILE */
 @media (max-width: 768px) {
-  .main-layout { grid-template-columns: 1fr; grid-template-rows: 55vh 1fr; height: auto; }
-  .feed-panel { height: 45vh; }
+  .main-layout { grid-template-columns: 1fr; grid-template-rows: 50vh auto; height: auto; }
+  .feed-panel { height: 50vh; }
   .header-stats { display: none; }
   .site-header { padding: 0.6rem 1rem; gap: 1rem; }
-  .logo-title { font-size: 24px; }
-  .filter-bar { top: 58px; gap: 0.4rem; padding: 0.5rem 1rem; }
-  .filter-btn { font-size: 11px; padding: 3px 10px; }
+  .logo-title { font-size: 22px; }
+  .logo-sub { display: none; }
+  .filter-bar { top: 55px; padding: 0.4rem 0.75rem; overflow-x: auto; flex-wrap: nowrap; }
+  .filter-btn { font-size: 11px; padding: 3px 9px; }
   .map-legend { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- ALERT BAR -->
 <div class="alert-bar">
-  <span class="alert-bar-label">⚡ LIVE REPORTS</span>
+  <span class="alert-bar-label">⚡ LIVE</span>
   <div class="alert-bar-ticker">
-    <span class="alert-bar-text">NEW: UFO sighting — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV — large bipedal figure &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp; NEW: Demonic entity — Salem, MA — witness in distress &nbsp;///&nbsp; NEW: UFO sighting — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV — large bipedal figure &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp;</span>
-    <span class="alert-bar-text">NEW: UFO sighting — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV — large bipedal figure &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp; NEW: Demonic entity — Salem, MA — witness in distress &nbsp;///&nbsp; NEW: UFO sighting — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV — large bipedal figure &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp;</span>
+    <span class="alert-bar-text">NEW: UFO formation — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp; NEW: Demonic entity — Salem, MA &nbsp;///&nbsp; NEW: Bigfoot tracks — Olympic Peninsula, WA &nbsp;///&nbsp; NEW: UFO formation — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp;</span>
+    <span class="alert-bar-text">NEW: UFO formation — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp; NEW: Demonic entity — Salem, MA &nbsp;///&nbsp; NEW: Bigfoot tracks — Olympic Peninsula, WA &nbsp;///&nbsp;</span>
   </div>
   <span class="alert-bar-time" id="alert-time"></span>
 </div>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="logo-wrap">
-    <div class="logo-live"><div class="live-dot"></div> LIVE MONITORING</div>
+    <div class="logo-live"><div class="live-dot"></div>LIVE MONITORING</div>
     <div class="logo-title">REPORTED<span>.LIVE</span></div>
     <div class="logo-sub">US INCIDENT ACTIVITY MONITOR — COMMUNITY FIELD REPORTS</div>
   </div>
   <div class="header-stats">
-    <div class="hstat">
-      <div class="hstat-num amber" id="total-reports">0</div>
-      <div class="hstat-label">TOTAL REPORTS</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num red" id="active-today">0</div>
-      <div class="hstat-label">THIS MONTH</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num green" id="states-count">0</div>
-      <div class="hstat-label">STATES ACTIVE</div>
-    </div>
+    <div class="hstat"><div class="hstat-num amber" id="total-reports">0</div><div class="hstat-label">TOTAL REPORTS</div></div>
+    <div class="hstat"><div class="hstat-num red" id="active-month">0</div><div class="hstat-label">THIS MONTH</div></div>
+    <div class="hstat"><div class="hstat-num green" id="states-count">0</div><div class="hstat-label">STATES ACTIVE</div></div>
   </div>
   <a href="GOOGLE_FORM_URL" target="_blank" class="header-report-btn">REPORT INCIDENT</a>
 </header>
 
-<!-- FILTER BAR -->
 <div class="filter-bar">
   <span class="filter-label">FILTER //</span>
-  <button class="filter-btn all active" data-cat="all" onclick="setFilter('all',this)">
-    <span class="filter-dot" style="background:var(--text)"></span>ALL
-  </button>
-  <button class="filter-btn cryptid" data-cat="cryptid" onclick="setFilter('cryptid',this)">
-    <span class="filter-dot" style="background:var(--amber)"></span>CRYPTID
-  </button>
-  <button class="filter-btn ghost" data-cat="ghost" onclick="setFilter('ghost',this)">
-    <span class="filter-dot" style="background:#8888ff"></span>GHOST
-  </button>
-  <button class="filter-btn ufo" data-cat="ufo" onclick="setFilter('ufo',this)">
-    <span class="filter-dot" style="background:var(--green)"></span>UFO
-  </button>
-  <button class="filter-btn alien" data-cat="alien" onclick="setFilter('alien',this)">
-    <span class="filter-dot" style="background:#44ffaa"></span>ALIEN
-  </button>
-  <button class="filter-btn unexplained" data-cat="unexplained" onclick="setFilter('unexplained',this)">
-    <span class="filter-dot" style="background:var(--blue)"></span>UNEXPLAINED
-  </button>
-  <button class="filter-btn demonic" data-cat="demonic" onclick="setFilter('demonic',this)">
-    <span class="filter-dot" style="background:var(--red)"></span>DEMONIC
-  </button>
-  <button class="filter-btn humanoid" data-cat="humanoid" onclick="setFilter('humanoid',this)">
-    <span class="filter-dot" style="background:var(--purple)"></span>HUMANOID
-  </button>
-  <button class="filter-btn atmospheric" data-cat="atmospheric" onclick="setFilter('atmospheric',this)">
-    <span class="filter-dot" style="background:#ffdd44"></span>ATMOSPHERIC
-  </button>
-  <button class="filter-btn other" data-cat="other" onclick="setFilter('other',this)">
-    <span class="filter-dot" style="background:var(--text2)"></span>OTHER
-  </button>
+  <button class="filter-btn all active" data-cat="all"><span class="filter-dot" style="background:var(--text)"></span>ALL</button>
+  <button class="filter-btn cryptid" data-cat="cryptid"><span class="filter-dot" style="background:var(--amber)"></span>CRYPTID</button>
+  <button class="filter-btn ghost" data-cat="ghost"><span class="filter-dot" style="background:#8888ff"></span>GHOST</button>
+  <button class="filter-btn ufo" data-cat="ufo"><span class="filter-dot" style="background:var(--green)"></span>UFO</button>
+  <button class="filter-btn alien" data-cat="alien"><span class="filter-dot" style="background:#44ffaa"></span>ALIEN</button>
+  <button class="filter-btn unexplained" data-cat="unexplained"><span class="filter-dot" style="background:var(--blue)"></span>UNEXPLAINED</button>
+  <button class="filter-btn demonic" data-cat="demonic"><span class="filter-dot" style="background:var(--red)"></span>DEMONIC</button>
+  <button class="filter-btn humanoid" data-cat="humanoid"><span class="filter-dot" style="background:var(--purple)"></span>HUMANOID</button>
+  <button class="filter-btn atmospheric" data-cat="atmospheric"><span class="filter-dot" style="background:#ffdd44"></span>ATMOSPHERIC</button>
+  <button class="filter-btn other" data-cat="other"><span class="filter-dot" style="background:var(--text2)"></span>OTHER</button>
 </div>
 
-<!-- MAIN LAYOUT -->
 <div class="main-layout">
-
-  <!-- MAP -->
   <div class="map-section">
     <div class="map-header">
       <span class="map-title">// LIVE INCIDENT MAP — UNITED STATES //</span>
       <span class="map-hint">CLICK PINS TO VIEW REPORTS</span>
     </div>
-    <div class="map-container">
-      <svg id="us-map" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg">
-        <rect width="960" height="600" fill="#050608"/>
-        <!-- Grid lines -->
-        <line x1="0" y1="300" x2="960" y2="300" stroke="#0d1520" stroke-width="0.5" stroke-dasharray="4,8"/>
-        <line x1="480" y1="0" x2="480" y2="600" stroke="#0d1520" stroke-width="0.5" stroke-dasharray="4,8"/>
-        <!-- US States - simplified paths -->
-        <!-- Pacific Coast -->
-        <path id="WA" class="state-path has-reports" d="M90,55 L220,55 L225,90 L195,100 L165,120 L95,115 Z" title="Washington"/>
-        <path id="OR" class="state-path" d="M95,115 L165,120 L170,180 L95,185 Z" title="Oregon"/>
-        <path id="CA" class="state-path has-reports" d="M95,185 L170,180 L175,290 L140,320 L90,280 Z" title="California"/>
-        <!-- Mountain West -->
-        <path id="ID" class="state-path" d="M165,120 L225,90 L235,160 L200,165 L175,185 L170,180 Z" title="Idaho"/>
-        <path id="NV" class="state-path" d="M140,200 L175,185 L190,270 L155,300 L130,260 Z" title="Nevada"/>
-        <path id="AZ" class="state-path has-reports" d="M155,300 L210,300 L215,370 L150,370 Z" title="Arizona"/>
-        <path id="UT" class="state-path" d="M190,220 L240,220 L245,300 L210,300 L190,270 Z" title="Utah"/>
-        <path id="MT" class="state-path" d="M225,55 L355,55 L360,120 L235,120 L225,90 Z" title="Montana"/>
-        <path id="WY" class="state-path" d="M235,120 L360,120 L360,185 L240,185 Z" title="Wyoming"/>
-        <path id="CO" class="state-path" d="M240,185 L360,185 L360,250 L240,250 Z" title="Colorado"/>
-        <path id="NM" class="state-path" d="M240,250 L360,250 L355,330 L245,325 Z" title="New Mexico"/>
-        <!-- Great Plains -->
-        <path id="ND" class="state-path" d="M355,55 L470,60 L465,115 L360,115 Z" title="North Dakota"/>
-        <path id="SD" class="state-path" d="M360,115 L465,115 L465,175 L360,175 Z" title="South Dakota"/>
-        <path id="NE" class="state-path" d="M360,175 L465,175 L465,230 L360,230 Z" title="Nebraska"/>
-        <path id="KS" class="state-path" d="M360,230 L465,230 L465,280 L360,280 Z" title="Kansas"/>
-        <path id="OK" class="state-path" d="M360,280 L465,280 L470,330 L355,330 Z" title="Oklahoma"/>
-        <path id="TX" class="state-path has-reports" d="M355,330 L470,330 L490,420 L430,450 L360,400 L340,360 Z" title="Texas"/>
-        <path id="MN" class="state-path" d="M465,60 L565,65 L565,140 L510,150 L465,130 L465,115 Z" title="Minnesota"/>
-        <path id="IA" class="state-path" d="M465,175 L565,175 L565,225 L465,225 Z" title="Iowa"/>
-        <path id="MO" class="state-path" d="M465,225 L570,225 L575,285 L465,285 Z" title="Missouri"/>
-        <path id="AR" class="state-path" d="M465,285 L575,285 L575,330 L465,330 Z" title="Arkansas"/>
-        <path id="LA" class="state-path" d="M465,330 L575,330 L570,380 L460,375 Z" title="Louisiana"/>
-        <!-- Midwest -->
-        <path id="WI" class="state-path" d="M540,80 L595,85 L600,155 L540,160 L510,150 L565,140 Z" title="Wisconsin"/>
-        <path id="MI" class="state-path has-reports" d="M595,85 L650,90 L645,155 L600,155 Z" title="Michigan"/>
-        <path id="IL" class="state-path" d="M540,160 L595,160 L595,240 L540,240 Z" title="Illinois"/>
-        <path id="IN" class="state-path" d="M595,160 L640,165 L638,240 L595,240 Z" title="Indiana"/>
-        <path id="OH" class="state-path" d="M640,165 L690,170 L685,245 L638,240 Z" title="Ohio"/>
-        <path id="KY" class="state-path" d="M570,240 L685,245 L680,285 L568,282 Z" title="Kentucky"/>
-        <path id="TN" class="state-path" d="M568,282 L680,285 L678,318 L565,315 Z" title="Tennessee"/>
-        <path id="MS" class="state-path" d="M540,315 L595,318 L592,375 L535,372 Z" title="Mississippi"/>
-        <path id="AL" class="state-path" d="M595,318 L645,320 L642,378 L592,375 Z" title="Alabama"/>
-        <!-- Northeast -->
-        <path id="NY" class="state-path has-reports" d="M690,120 L775,115 L780,175 L690,170 Z" title="New York"/>
-        <path id="PA" class="state-path has-reports" d="M690,170 L780,175 L778,215 L688,210 Z" title="Pennsylvania"/>
-        <path id="WV" class="state-path has-reports" d="M688,210 L738,215 L735,255 L685,248 Z" title="West Virginia"/>
-        <path id="VA" class="state-path" d="M688,210 L778,215 L775,248 L735,255 Z" title="Virginia"/>
-        <path id="NC" class="state-path" d="M680,248 L775,248 L778,278 L678,278 Z" title="North Carolina"/>
-        <path id="SC" class="state-path" d="M720,278 L778,278 L775,310 L718,308 Z" title="South Carolina"/>
-        <path id="GA" class="state-path" d="M645,320 L718,320 L715,375 L642,378 Z" title="Georgia"/>
-        <path id="FL" class="state-path has-reports" d="M668,375 L715,375 L725,430 L690,455 L655,430 L645,400 Z" title="Florida"/>
-        <path id="MD" class="state-path" d="M735,205 L778,207 L776,220 L733,218 Z" title="Maryland"/>
-        <path id="DE" class="state-path" d="M778,207 L792,208 L790,222 L776,220 Z" title="Delaware"/>
-        <path id="NJ" class="state-path" d="M780,175 L800,178 L798,210 L778,207 Z" title="New Jersey"/>
-        <path id="CT" class="state-path" d="M800,158 L820,160 L818,178 L798,175 Z" title="Connecticut"/>
-        <path id="RI" class="state-path" d="M820,158 L833,160 L831,170 L818,168 Z" title="Rhode Island"/>
-        <path id="MA" class="state-path has-reports" d="M790,140 L840,138 L838,158 L788,155 Z" title="Massachusetts"/>
-        <path id="VT" class="state-path" d="M775,105 L800,105 L798,140 L773,138 Z" title="Vermont"/>
-        <path id="NH" class="state-path" d="M800,100 L820,102 L818,140 L798,138 Z" title="New Hampshire"/>
-        <path id="ME" class="state-path" d="M810,65 L855,70 L850,105 L808,102 Z" title="Maine"/>
-        <!-- Alaska & Hawaii insets -->
-        <path id="AK" class="state-path has-reports" d="M55,430 L155,425 L165,480 L120,500 L55,490 Z" title="Alaska"/>
-        <path id="HI" class="state-path" d="M200,480 L215,475 L220,488 L205,492 Z M222,483 L232,480 L236,490 L224,492 Z M237,478 L248,475 L250,486 L238,488 Z" title="Hawaii"/>
-        <!-- State labels -->
-        <text x="148" y="88" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">WA</text>
-        <text x="130" y="155" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">OR</text>
-        <text x="125" y="245" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">CA</text>
-        <text x="290" y="88" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MT</text>
-        <text x="415" y="88" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">ND</text>
-        <text x="415" y="148" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">SD</text>
-        <text x="300" y="155" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">ID</text>
-        <text x="300" y="218" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">WY</text>
-        <text x="300" y="222" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle"></text>
-        <text x="415" y="205" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NE</text>
-        <text x="300" y="222" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">CO</text>
-        <text x="415" y="257" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">KS</text>
-        <text x="415" y="305" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">OK</text>
-        <text x="415" y="385" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">TX</text>
-        <text x="515" y="105" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MN</text>
-        <text x="515" y="200" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">IA</text>
-        <text x="518" y="258" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MO</text>
-        <text x="518" y="308" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">AR</text>
-        <text x="515" y="355" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">LA</text>
-        <text x="568" y="122" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">WI</text>
-        <text x="622" y="122" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MI</text>
-        <text x="568" y="202" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">IL</text>
-        <text x="618" y="202" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">IN</text>
-        <text x="663" y="207" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">OH</text>
-        <text x="625" y="265" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">KY</text>
-        <text x="622" y="300" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">TN</text>
-        <text x="563" y="347" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MS</text>
-        <text x="618" y="348" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">AL</text>
-        <text x="680" y="348" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">GA</text>
-        <text x="683" y="415" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">FL</text>
-        <text x="735" y="145" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NY</text>
-        <text x="735" y="193" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">PA</text>
-        <text x="712" y="235" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">WV</text>
-        <text x="757" y="232" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">VA</text>
-        <text x="727" y="265" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NC</text>
-        <text x="748" y="295" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">SC</text>
-        <text x="815" y="92" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">ME</text>
-        <text x="812" y="122" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NH</text>
-        <text x="788" y="122" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">VT</text>
-        <text x="815" y="148" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MA</text>
-        <text x="826" y="165" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">RI</text>
-        <text x="810" y="170" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">CT</text>
-        <text x="790" y="192" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NJ</text>
-        <text x="784" y="213" font-size="6" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">MD</text>
-        <text x="796" y="215" font-size="5" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">DE</text>
-        <text x="200" y="258" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NV</text>
-        <text x="215" y="338" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">AZ</text>
-        <text x="218" y="262" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">UT</text>
-        <text x="300" y="310" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">NM</text>
-        <text x="105" y="462" font-size="7" fill="rgba(232,234,240,0.25)" font-family="monospace" text-anchor="middle">AK</text>
-        <!-- Inset boxes -->
-        <rect x="48" y="418" width="125" height="78" fill="none" stroke="#1a2535" stroke-width="0.5" stroke-dasharray="3,4"/>
-        <rect x="190" y="468" width="70" height="30" fill="none" stroke="#1a2535" stroke-width="0.5" stroke-dasharray="3,4"/>
-        <text x="60" y="415" font-size="6" fill="rgba(232,234,240,0.2)" font-family="monospace">ALASKA</text>
-        <text x="192" y="465" font-size="6" fill="rgba(232,234,240,0.2)" font-family="monospace">HAWAII</text>
-      </svg>
-      <!-- Pins will be injected here -->
-      <div id="map-pins-container" style="position:absolute;inset:0;pointer-events:none;"></div>
-    </div>
-
-    <!-- Legend -->
+    <div id="map-svg-container"></div>
+    <div id="map-pins-container" style="position:absolute;inset:0;pointer-events:none;top:0;left:0;width:100%;height:100%;"></div>
     <div class="map-legend">
       <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>CRYPTID</div>
       <div class="legend-item"><div class="legend-dot" style="background:#8888ff"></div>GHOST</div>
@@ -814,7 +263,6 @@ body::before {
     </div>
   </div>
 
-  <!-- FEED PANEL -->
   <div class="feed-panel">
     <div class="feed-header">
       <span class="feed-title">// INCIDENT FEED</span>
@@ -822,31 +270,30 @@ body::before {
     </div>
     <div class="feed-list" id="feed-list"></div>
   </div>
-
 </div>
 
-<!-- DETAIL MODAL -->
-<div class="modal-overlay" id="detail-overlay" onclick="handleOverlayClick(event,'detail-overlay')">
-  <div class="detail-modal" id="detail-modal-content"></div>
+<div class="modal-overlay" id="detail-overlay">
+  <div class="detail-modal" id="detail-content"></div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json" type="application/json" id="us-atlas-data"></script>
 <script src="reports.js"></script>
 <script>
 // ── CATEGORY COLORS ──
 var catColors = {
-  cryptid: '#ffaa00', ghost: '#8888ff', ufo: '#00ff88',
-  alien: '#44ffaa', unexplained: '#00aaff', demonic: '#ff2d2d',
-  humanoid: '#aa44ff', atmospheric: '#ffdd44', other: 'rgba(232,234,240,0.55)'
+  cryptid:'#ffaa00', ghost:'#8888ff', ufo:'#00ff88',
+  alien:'#44ffaa', unexplained:'#00aaff', demonic:'#ff2d2d',
+  humanoid:'#aa44ff', atmospheric:'#ffdd44', other:'rgba(232,234,240,0.55)'
 };
 
-// ── STATE ──
 var activeFilter = 'all';
+var projection, svgWidth, svgHeight;
 
 // ── CLOCK ──
 function updateClock() {
-  var now = new Date();
   var el = document.getElementById('alert-time');
-  if (el) el.textContent = now.toUTCString().replace('GMT','UTC');
+  if (el) el.textContent = new Date().toUTCString().replace('GMT','UTC');
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -858,114 +305,185 @@ function updateStats() {
   var thisMonth = reports.filter(function(r) {
     var d = new Date(r.date);
     return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-  });
-  document.getElementById('active-today').textContent = thisMonth.length;
+  }).length;
+  document.getElementById('active-month').textContent = thisMonth;
   var states = new Set(reports.map(function(r){ return r.state; }));
   document.getElementById('states-count').textContent = states.size;
   document.getElementById('feed-count').textContent = reports.length + ' REPORTS';
 }
 
-// ── FILTER ──
-function setFilter(cat, btn) {
-  activeFilter = cat;
-  document.querySelectorAll('.filter-btn').forEach(function(b) {
-    b.classList.remove('active');
-  });
-  btn.classList.add('active');
-  renderFeed();
-  renderPins();
+// ── MAP ──
+function initMap() {
+  var container = document.getElementById('map-svg-container');
+  var rect = container.parentElement.getBoundingClientRect();
+  svgWidth = rect.width;
+  svgHeight = rect.height;
+
+  var svg = d3.select('#map-svg-container')
+    .append('svg')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
+
+  // Background
+  svg.append('rect').attr('width', svgWidth).attr('height', svgHeight).attr('fill', '#050608');
+
+  // Grid lines
+  svg.append('line').attr('x1',0).attr('y1',svgHeight/2).attr('x2',svgWidth).attr('y2',svgHeight/2).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
+  svg.append('line').attr('x1',svgWidth/2).attr('y1',0).attr('x2',svgWidth/2).attr('y2',svgHeight).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
+
+  projection = d3.geoAlbersUsa()
+    .scale(svgWidth * 1.25)
+    .translate([svgWidth / 2, svgHeight / 2]);
+
+  var path = d3.geoPath().projection(projection);
+
+  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
+    .then(function(r){ return r.json(); })
+    .then(function(us) {
+      var states = topojson.feature(us, us.objects.states);
+      svg.selectAll('.state')
+        .data(states.features)
+        .enter()
+        .append('path')
+        .attr('class', 'state')
+        .attr('d', path)
+        .on('click', function(event, d) {
+          d3.selectAll('.state').classed('active', false);
+          d3.select(this).classed('active', true);
+        });
+
+      // State borders
+      svg.append('path')
+        .datum(topojson.mesh(us, us.objects.states, function(a,b){ return a !== b; }))
+        .attr('fill', 'none')
+        .attr('stroke', '#1a2840')
+        .attr('stroke-width', '0.5')
+        .attr('d', path);
+
+      renderPins();
+    })
+    .catch(function() {
+      // Fallback if fetch fails
+      svg.append('text').attr('x', svgWidth/2).attr('y', svgHeight/2).attr('text-anchor','middle').attr('fill','rgba(232,234,240,0.2)').attr('font-family','monospace').attr('font-size','12px').text('MAP LOADING...');
+    });
 }
 
-function getFiltered() {
-  if (activeFilter === 'all') return reports;
-  return reports.filter(function(r){ return r.category === activeFilter; });
-}
-
-// ── FEED ──
-function renderFeed() {
-  var list = getFiltered();
-  var el = document.getElementById('feed-list');
-  if (!list.length) {
-    el.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text3);font-size:11px;letter-spacing:0.1em;">NO REPORTS MATCH CURRENT FILTER</div>';
-    return;
-  }
-  var sorted = list.slice().sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
-  el.innerHTML = sorted.map(function(r) {
-    var statusLabel = { pending: 'PENDING', verified: 'VERIFIED', unverified: 'UNVERIFIED' };
-    return '<div class="feed-item ' + r.category + '" onclick="openDetail(' + r.id + ')">'
-      + '<div class="feed-item-top">'
-      + '<span class="feed-item-cat ' + r.category + '">' + r.category.toUpperCase() + '</span>'
-      + '<span class="feed-item-date">' + new Date(r.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase() + '</span>'
-      + '</div>'
-      + '<div class="feed-item-location">📍 ' + r.city + ', ' + r.state + '</div>'
-      + '<div class="feed-item-desc">' + r.description + '</div>'
-      + (r.image ? '<img class="feed-item-img" src="' + r.image + '" alt="sighting photo">' : '')
-      + '<div class="feed-item-status ' + r.status + '">' + (statusLabel[r.status]||r.status) + '</div>'
-      + '</div>';
-  }).join('');
-}
-
-// ── MAP PINS ──
-// State center coordinates as % of SVG viewBox (960x600)
+// ── PINS ──
+// Approximate lat/lng centers for each state
 var stateCenters = {
-  WA:{x:14.8,y:13.3}, OR:{x:13.5,y:25.0}, CA:{x:12.5,y:41.7},
-  ID:{x:19.8,y:23.3}, NV:{x:17.2,y:40.0}, AZ:{x:19.3,y:56.0},
-  UT:{x:22.9,y:37.5}, MT:{x:30.7,y:14.6}, WY:{x:31.0,y:25.8},
-  CO:{x:31.0,y:36.0}, NM:{x:31.0,y:46.7}, ND:{x:43.2,y:14.5},
-  SD:{x:43.2,y:24.2}, NE:{x:43.2,y:33.3}, KS:{x:43.2,y:42.5},
-  OK:{x:43.2,y:51.0}, TX:{x:43.0,y:63.3}, MN:{x:54.7,y:17.5},
-  IA:{x:54.7,y:33.3}, MO:{x:54.5,y:42.5}, AR:{x:54.7,y:51.0},
-  LA:{x:54.0,y:60.0}, WI:{x:57.3,y:20.0}, MI:{x:64.1,y:20.0},
-  IL:{x:57.3,y:33.3}, IN:{x:62.0,y:33.3}, OH:{x:67.1,y:34.2},
-  KY:{x:63.5,y:44.2}, TN:{x:63.0,y:50.0}, MS:{x:57.5,y:57.5},
-  AL:{x:63.0,y:57.5}, GA:{x:69.3,y:57.5}, FL:{x:70.3,y:68.3},
-  NY:{x:75.5,y:24.2}, PA:{x:75.5,y:32.5}, WV:{x:72.0,y:38.3},
-  VA:{x:76.0,y:38.3}, NC:{x:75.5,y:43.3}, SC:{x:76.5,y:49.2},
-  MD:{x:79.2,y:35.0}, DE:{x:81.3,y:35.0}, NJ:{x:80.5,y:32.0},
-  CT:{x:82.3,y:27.5}, RI:{x:84.5,y:27.0}, MA:{x:82.0,y:24.2},
-  VT:{x:80.7,y:20.0}, NH:{x:82.3,y:20.0}, ME:{x:84.5,y:14.5},
-  AK:{x:11.0,y:76.7}, HI:{x:23.0,y:82.5}
+  AL:{lat:32.8,lng:-86.8}, AK:{lat:61.4,lng:-152.0}, AZ:{lat:34.3,lng:-111.1},
+  AR:{lat:34.9,lng:-92.4}, CA:{lat:36.8,lng:-119.4}, CO:{lat:39.0,lng:-105.5},
+  CT:{lat:41.6,lng:-72.7}, DE:{lat:38.9,lng:-75.5}, FL:{lat:27.8,lng:-81.5},
+  GA:{lat:32.2,lng:-83.4}, HI:{lat:20.2,lng:-156.4}, ID:{lat:44.4,lng:-114.5},
+  IL:{lat:40.0,lng:-89.2}, IN:{lat:39.9,lng:-86.3}, IA:{lat:42.1,lng:-93.2},
+  KS:{lat:38.5,lng:-98.4}, KY:{lat:37.7,lng:-84.9}, LA:{lat:30.5,lng:-91.8},
+  ME:{lat:44.7,lng:-69.4}, MD:{lat:39.1,lng:-76.8}, MA:{lat:42.2,lng:-71.5},
+  MI:{lat:44.3,lng:-84.5}, MN:{lat:46.4,lng:-93.1}, MS:{lat:32.7,lng:-89.7},
+  MO:{lat:38.3,lng:-92.5}, MT:{lat:47.0,lng:-110.5}, NE:{lat:41.5,lng:-99.9},
+  NV:{lat:38.5,lng:-117.1}, NH:{lat:43.7,lng:-71.6}, NJ:{lat:40.1,lng:-74.5},
+  NM:{lat:34.8,lng:-106.2}, NY:{lat:43.0,lng:-75.5}, NC:{lat:35.5,lng:-79.4},
+  ND:{lat:47.5,lng:-100.5}, OH:{lat:40.4,lng:-82.8}, OK:{lat:35.6,lng:-97.5},
+  OR:{lat:43.9,lng:-120.6}, PA:{lat:40.6,lng:-77.2}, RI:{lat:41.7,lng:-71.5},
+  SC:{lat:33.9,lng:-80.9}, SD:{lat:44.4,lng:-100.2}, TN:{lat:35.9,lng:-86.7},
+  TX:{lat:31.5,lng:-99.3}, UT:{lat:39.3,lng:-111.1}, VT:{lat:44.0,lng:-72.7},
+  VA:{lat:37.5,lng:-79.0}, WA:{lat:47.4,lng:-120.5}, WV:{lat:38.6,lng:-80.6},
+  WI:{lat:44.3,lng:-89.8}, WY:{lat:43.0,lng:-107.6}, DC:{lat:38.9,lng:-77.0}
 };
 
 function renderPins() {
   var container = document.getElementById('map-pins-container');
-  var list = getFiltered();
+  var list = activeFilter === 'all' ? reports : reports.filter(function(r){ return r.category === activeFilter; });
+
+  if (!projection) { setTimeout(renderPins, 500); return; }
+
+  container.innerHTML = '';
+  container.style.position = 'absolute';
+  container.style.top = '0';
+  container.style.left = '0';
+  container.style.width = '100%';
+  container.style.height = '100%';
   container.style.pointerEvents = 'none';
-  container.innerHTML = list.map(function(r) {
+
+  list.forEach(function(r) {
     var center = stateCenters[r.state];
-    if (!center) return '';
-    // Add small random offset so pins in same state don't stack
-    var ox = (Math.sin(r.id * 7.3) * 3);
-    var oy = (Math.cos(r.id * 5.7) * 3);
-    var x = center.x + ox;
-    var y = center.y + oy;
-    return '<div class="map-pin pin-' + r.category + '" style="left:' + x + '%;top:' + y + '%;pointer-events:all;" onclick="openDetail(' + r.id + ')">'
-      + '<div class="pin-outer"><div class="pin-inner"></div><div class="pin-ring"></div></div>'
-      + '<div class="pin-tooltip">' + r.category.toUpperCase() + ' — ' + r.city + ', ' + r.state + '</div>'
+    if (!center) return;
+
+    // Slight random offset so pins in same state don't stack
+    var offsetLng = (Math.sin(r.id * 3.7) * 0.8);
+    var offsetLat = (Math.cos(r.id * 5.3) * 0.5);
+    var coords = projection([center.lng + offsetLng, center.lat + offsetLat]);
+    if (!coords) return;
+
+    var pct_x = (coords[0] / svgWidth) * 100;
+    var pct_y = (coords[1] / svgHeight) * 100;
+
+    var pin = document.createElement('div');
+    pin.className = 'map-pin cat-' + r.category;
+    pin.style.left = pct_x + '%';
+    pin.style.top = pct_y + '%';
+    pin.style.pointerEvents = 'all';
+    pin.innerHTML = '<div class="pin-outer"><div class="pin-inner"></div><div class="pin-ring"></div></div>'
+      + '<div class="pin-tooltip">' + r.category.toUpperCase() + ' — ' + r.city + ', ' + r.state + '</div>';
+    pin.addEventListener('click', function(){ openDetail(r.id); });
+    container.appendChild(pin);
+  });
+}
+
+// ── FILTER ──
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    activeFilter = this.getAttribute('data-cat');
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    this.classList.add('active');
+    renderFeed();
+    renderPins();
+  });
+});
+
+// ── FEED ──
+function renderFeed() {
+  var list = activeFilter === 'all' ? reports : reports.filter(function(r){ return r.category === activeFilter; });
+  var el = document.getElementById('feed-list');
+  if (!list.length) {
+    el.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text3);font-size:11px;letter-spacing:0.1em;">NO REPORTS MATCH FILTER</div>';
+    return;
+  }
+  var sorted = list.slice().sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+  el.innerHTML = sorted.map(function(r) {
+    var d = new Date(r.date);
+    var dateStr = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
+    return '<div class="feed-item ' + r.category + '" onclick="openDetail(' + r.id + ')">'
+      + '<div class="feed-item-top"><span class="feed-cat ' + r.category + '">' + r.category.toUpperCase() + '</span><span class="feed-date">' + dateStr + '</span></div>'
+      + '<div class="feed-location">📍 ' + r.city + ', ' + r.state + '</div>'
+      + '<div class="feed-desc">' + r.description + '</div>'
+      + (r.image ? '<img class="feed-img" src="' + r.image + '" alt="sighting">' : '')
+      + '<div class="feed-status ' + (r.status||'pending') + '">' + (r.status||'PENDING').toUpperCase() + '</div>'
       + '</div>';
   }).join('');
 }
 
 // ── DETAIL ──
 function openDetail(id) {
-  var r = reports.find(function(x){ return x.id === id; });
+  var r = null;
+  for (var i=0;i<reports.length;i++){ if(reports[i].id===id){ r=reports[i]; break; } }
   if (!r) return;
   var color = catColors[r.category] || 'var(--text)';
-  var statusLabel = { pending: 'PENDING REVIEW', verified: 'FIELD VERIFIED', unverified: 'UNVERIFIED' };
-  var statusClass = r.status || 'pending';
-  document.getElementById('detail-modal-content').innerHTML =
+  var d = new Date(r.date);
+  var dateStr = d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}).toUpperCase();
+  var statusLabels = { pending:'PENDING REVIEW', verified:'FIELD VERIFIED', unverified:'UNVERIFIED' };
+  document.getElementById('detail-content').innerHTML =
     (r.image ? '<img class="detail-img" src="' + r.image + '" alt="sighting">' : '')
     + '<div class="detail-body">'
     + '<div class="detail-cat" style="color:' + color + '">' + r.category.toUpperCase() + ' INCIDENT</div>'
     + '<div class="detail-title">' + (r.title || r.city + ', ' + r.state) + '</div>'
     + '<div class="detail-meta">'
-    + '<div class="detail-meta-item"><div class="detail-meta-label">LOCATION</div><div class="detail-meta-val">📍 ' + r.city + ', ' + r.state + '</div></div>'
-    + '<div class="detail-meta-item"><div class="detail-meta-label">DATE</div><div class="detail-meta-val">' + new Date(r.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}).toUpperCase() + '</div></div>'
-    + '<div class="detail-meta-item"><div class="detail-meta-label">REPORTED BY</div><div class="detail-meta-val">' + (r.reporter || 'ANONYMOUS') + '</div></div>'
+    + '<div><div class="detail-meta-label">LOCATION</div><div class="detail-meta-val">📍 ' + r.city + ', ' + r.state + '</div></div>'
+    + '<div><div class="detail-meta-label">DATE</div><div class="detail-meta-val">' + dateStr + '</div></div>'
+    + '<div><div class="detail-meta-label">FILED BY</div><div class="detail-meta-val">' + (r.reporter||'ANONYMOUS') + '</div></div>'
     + '</div>'
     + '<p class="detail-desc">' + r.description + '</p>'
-    + '<div class="detail-status-badge ' + statusClass + '">' + (statusLabel[statusClass]||statusClass) + '</div>'
-    + '<button onclick="closeDetail()" style="display:block;margin-top:1rem;background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:10px;letter-spacing:0.1em;padding:8px 20px;cursor:pointer;width:100%;">✕ CLOSE REPORT</button>'
+    + '<div class="detail-badge ' + (r.status||'pending') + '">' + (statusLabels[r.status]||'PENDING REVIEW') + '</div>'
+    + '<button class="detail-close-btn" onclick="closeDetail()">✕ CLOSE REPORT</button>'
     + '</div>';
   document.getElementById('detail-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -976,16 +494,20 @@ function closeDetail() {
   document.body.style.overflow = '';
 }
 
-function handleOverlayClick(e, id) {
-  if (e.target === document.getElementById(id)) closeDetail();
-}
-
+document.getElementById('detail-overlay').addEventListener('click', function(e){
+  if (e.target === this) closeDetail();
+});
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDetail(); });
 
-// ── INIT ──
-updateStats();
-renderFeed();
-renderPins();
+// Need topojson
+var topoScript = document.createElement('script');
+topoScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js';
+topoScript.onload = function() {
+  initMap();
+  updateStats();
+  renderFeed();
+};
+document.head.appendChild(topoScript);
 </script>
 </body>
 </html>
