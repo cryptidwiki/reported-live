@@ -65,7 +65,7 @@ var reports = [
     date: "2026-05-15",
     description: "Third consecutive night I have woken at 3am to a figure standing in the corner of my bedroom. It is tall, completely black, and when I turn on the light it is gone but the room smells of sulfur for about ten minutes. My dog barks at that corner even when nothing is visible. Last night it moved toward the bed. I am not sleeping in that room anymore.",
     reporter: "sleepless_in_salem",
-    image: ""
+    image: "images/room.png"
   },
   {
     id: 5,
