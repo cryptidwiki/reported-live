@@ -361,7 +361,7 @@ function initMap() {
 
   svg.append('rect').attr('width',w).attr('height',h).attr('fill','#050608');
 
-  projection = d3.geoAlbersUsa().scale(w*1.22).translate([w/2, h/2 - 10]);
+  projection = d3.geoAlbersUsa().scale(w*1.26).translate([w/2, h/2]);
   var path = d3.geoPath().projection(projection);
   var tooltip = document.getElementById('state-tooltip');
 
