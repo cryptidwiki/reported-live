@@ -101,6 +101,6 @@ var reports = [
     date: "2026-05-18",
     description: "For three weeks our entire neighborhood has heard knocking from beneath the street at 2am exactly. The city sent a crew to investigate and found no pipe activity, no animals, and no geological explanation. The sound is rhythmic — three knocks, pause, three knocks. It moves up the street block by block each night as if something is traveling underground.",
     reporter: "savannah_resident_2026",
-    image: ""
+    image: "images/street.png"
   }
 ];
