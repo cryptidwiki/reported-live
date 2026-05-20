@@ -220,12 +220,15 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
     <div class="state-banner" id="state-banner" onclick="clearStateFilter()"></div>
     <div class="map-legend">
       <div class="legend-title">INCIDENT DENSITY</div>
-      <div class="legend-bar">
-        <div class="legend-gradient"></div>
-      </div>
-      <div class="legend-labels">
+      <div class="legend-bar" style="display:flex;gap:4px;align-items:center;">
+        <div style="width:20px;height:10px;background:rgba(255,100,0,0.25);border:1px solid rgba(255,80,0,0.4);"></div>
         <span class="legend-label">LOW</span>
+        <div style="width:20px;height:10px;background:rgba(255,60,0,0.45);border:1px solid rgba(255,80,0,0.4);"></div>
+        <span class="legend-label">MED</span>
+        <div style="width:20px;height:10px;background:rgba(255,30,0,0.70);border:1px solid rgba(255,80,0,0.4);"></div>
         <span class="legend-label">HIGH</span>
+        <div style="width:20px;height:10px;background:#0a1220;border:1px solid #1a2840;"></div>
+        <span class="legend-label">NONE</span>
       </div>
     </div>
   </div>
@@ -405,23 +408,33 @@ function initMap() {
 
 function updateHeatmap() {
   var counts = getStateCounts();
-  var maxCount = Math.max(1, d3.max(Object.values(counts)) || 1);
+  var values = Object.values(counts).filter(function(v){ return v > 0; });
+  var maxCount = Math.max(1, d3.max(values) || 1);
 
   d3.selectAll('.state-path').attr('fill', function(d) {
     var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
     var count = counts[abbr] || 0;
     var isSelected = activeState && activeState === abbr;
-    if (isSelected) return 'rgba(255,170,0,0.35)';
+
+    // Selected state — amber highlight
+    if (isSelected) return 'rgba(255,170,0,0.3)';
+
+    // No reports — stay dark
     if (count === 0) return '#0a1220';
+
+    // Scale from dim orange to bright red based on intensity
     var intensity = count / maxCount;
-    var r = Math.round(255 * Math.min(1, intensity * 1.2));
-    var g = Math.round(45 * (1 - intensity));
-    var b = Math.round(45 * (1 - intensity));
-    var a = 0.15 + (intensity * 0.7);
-    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+    if (intensity < 0.33) return 'rgba(255,100,0,0.25)';
+    if (intensity < 0.66) return 'rgba(255,60,0,0.45)';
+    return 'rgba(255,30,0,0.70)';
+
   }).attr('stroke', function(d) {
     var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
-    return (activeState && activeState === abbr) ? 'rgba(255,170,0,0.8)' : '#1a2840';
+    var isSelected = activeState && activeState === abbr;
+    var count = (getStateCounts()[abbr] || 0);
+    if (isSelected) return 'rgba(255,170,0,0.9)';
+    if (count > 0) return 'rgba(255,80,0,0.4)';
+    return '#1a2840';
   }).attr('stroke-width', function(d) {
     var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
     return (activeState && activeState === abbr) ? 1.5 : 0.5;
