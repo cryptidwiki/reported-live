@@ -10,7 +10,6 @@
   --bg: #050608;
   --bg2: #080910;
   --bg3: #0d0f14;
-  --bg4: #111318;
   --text: #e8eaf0;
   --text2: rgba(232,234,240,0.55);
   --text3: rgba(232,234,240,0.28);
@@ -22,27 +21,11 @@
   --border: rgba(232,234,240,0.08);
   --border2: rgba(232,234,240,0.15);
   --mono: 'Share Tech Mono', monospace;
-  --display: 'Rajdhani', sans-serif;
   --condensed: 'Barlow Condensed', sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--mono);
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: crosshair;
-}
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
-  pointer-events: none;
-  z-index: 9999;
-}
+body { background: var(--bg); color: var(--text); font-family: var(--mono); min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 9999; }
 
 /* ALERT BAR */
 .alert-bar { background: var(--red); padding: 5px 1.5rem; display: flex; align-items: center; gap: 1rem; overflow: hidden; }
@@ -50,173 +33,154 @@ body::before {
 .alert-bar-ticker { display: flex; overflow: hidden; flex: 1; }
 .alert-bar-text { font-size: 11px; font-family: var(--condensed); font-weight: 500; color: #000; white-space: nowrap; animation: ticker 30s linear infinite; letter-spacing: 0.05em; }
 @keyframes ticker { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-.alert-bar-time { font-size: 10px; font-family: var(--mono); color: rgba(0,0,0,0.6); white-space: nowrap; flex-shrink: 0; }
+.alert-time { font-size: 10px; font-family: var(--mono); color: rgba(0,0,0,0.6); white-space: nowrap; flex-shrink: 0; }
 
 /* HEADER */
 .site-header { background: var(--bg2); border-bottom: 1px solid var(--border2); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 2rem; position: sticky; top: 0; z-index: 100; }
-.logo-wrap { display: flex; flex-direction: column; line-height: 1; }
-.logo-live { font-size: 9px; letter-spacing: 0.3em; color: var(--red); font-family: var(--mono); display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.logo-live { font-size: 9px; letter-spacing: 0.3em; color: var(--red); display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
 .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: livepulse 1.5s ease-in-out infinite; }
 @keyframes livepulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
-.logo-title { font-family: var(--condensed); font-size: 32px; font-weight: 700; letter-spacing: 0.08em; color: var(--text); line-height: 1; }
+.logo-title { font-family: var(--condensed); font-size: 32px; font-weight: 700; letter-spacing: 0.08em; line-height: 1; }
 .logo-title span { color: var(--red); }
 .logo-sub { font-size: 9px; letter-spacing: 0.2em; color: var(--text3); margin-top: 3px; }
 .header-stats { display: flex; gap: 2rem; margin-left: auto; }
-.hstat { display: flex; flex-direction: column; align-items: flex-end; }
 .hstat-num { font-family: var(--condensed); font-size: 22px; font-weight: 600; line-height: 1; }
 .hstat-num.red { color: var(--red); }
 .hstat-num.amber { color: var(--amber); }
 .hstat-num.green { color: var(--green); }
 .hstat-label { font-size: 8px; letter-spacing: 0.18em; color: var(--text3); margin-top: 2px; }
-.header-report-btn { font-family: var(--condensed); font-size: 13px; font-weight: 700; letter-spacing: 0.15em; padding: 10px 24px; background: var(--red); color: #000; border: none; cursor: pointer; transition: all 0.15s; text-decoration: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; flex-shrink: 0; }
-.header-report-btn:hover { background: #ff5555; transform: translateY(-1px); }
-.header-report-btn::before { content: '+'; font-size: 18px; font-weight: 300; }
+.report-btn { font-family: var(--condensed); font-size: 13px; font-weight: 700; letter-spacing: 0.15em; padding: 10px 24px; background: var(--red); color: #000; border: none; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; flex-shrink: 0; transition: all 0.15s; }
+.report-btn:hover { background: #ff5555; transform: translateY(-1px); }
+.report-btn::before { content: '+'; font-size: 18px; font-weight: 300; }
 
 /* FILTER BAR */
 .filter-bar { background: var(--bg3); border-bottom: 1px solid var(--border); padding: 0.6rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; position: sticky; top: 69px; z-index: 90; }
-.filter-label { font-size: 9px; letter-spacing: 0.2em; color: var(--text3); white-space: nowrap; margin-right: 4px; }
-.filter-btn { font-family: var(--condensed); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
-.filter-btn:hover { border-color: var(--text); color: var(--text); }
-.filter-btn.active { color: #000; border-color: transparent; }
-.filter-btn.all.active { background: var(--text); }
-.filter-btn.cryptid.active { background: var(--amber); }
-.filter-btn.ghost.active { background: #8888ff; }
-.filter-btn.ufo.active { background: var(--green); }
-.filter-btn.alien.active { background: #44ffaa; }
-.filter-btn.unexplained.active { background: var(--blue); }
-.filter-btn.demonic.active { background: var(--red); }
-.filter-btn.humanoid.active { background: var(--purple); }
-.filter-btn.atmospheric.active { background: #ffdd44; }
-.filter-btn.other.active { background: var(--text2); }
-.filter-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.filter-label { font-size: 9px; letter-spacing: 0.2em; color: var(--text3); white-space: nowrap; }
+.fbtn { font-family: var(--condensed); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.fbtn:hover { border-color: var(--text); color: var(--text); }
+.fbtn.active { color: #000; border-color: transparent; }
+.fbtn.all.active { background: var(--text); }
+.fbtn.cryptid.active { background: var(--amber); }
+.fbtn.ghost.active { background: #8888ff; }
+.fbtn.ufo.active { background: var(--green); }
+.fbtn.alien.active { background: #44ffaa; }
+.fbtn.unexplained.active { background: var(--blue); }
+.fbtn.demonic.active { background: var(--red); }
+.fbtn.humanoid.active { background: var(--purple); }
+.fbtn.atmospheric.active { background: #ffdd44; }
+.fbtn.other.active { background: var(--text2); }
+.fdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
 /* MAIN LAYOUT */
-.main-layout { display: grid; grid-template-columns: 1fr 380px; height: calc(100vh - 108px); }
+.main-layout { display: grid; grid-template-columns: 1fr 400px; height: calc(100vh - 110px); }
 
 /* MAP */
 .map-section { position: relative; background: var(--bg); overflow: hidden; border-right: 1px solid var(--border2); }
 .map-header { position: absolute; top: 0; left: 0; right: 0; padding: 0.75rem 1rem; background: linear-gradient(to bottom, rgba(5,6,8,0.95), transparent); z-index: 10; display: flex; align-items: center; justify-content: space-between; }
 .map-title { font-family: var(--condensed); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--amber); }
 .map-hint { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; }
-#map-svg-container { width: 100%; height: 100%; }
-#map-svg-container svg { width: 100%; height: 100%; }
+#map-container { width: 100%; height: 100%; }
+#map-container svg { width: 100%; height: 100%; }
 
-/* State styles */
-.state { fill: #0a1220; stroke: #1a2840; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
-.state:hover { fill: #162035; }
-.state.active { fill: #1a2840; stroke: var(--amber); stroke-width: 1; }
+/* State tooltip */
+.state-tooltip { position: absolute; background: rgba(5,6,8,0.95); border: 1px solid var(--border2); padding: 6px 12px; font-size: 10px; font-family: var(--mono); color: var(--text); pointer-events: none; z-index: 50; display: none; letter-spacing: 0.05em; }
 
-/* Pins */
-.map-pin { cursor: pointer; position: absolute; transform: translate(-50%, -50%); z-index: 20; }
-.pin-outer { width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; transition: transform 0.15s; }
-.map-pin:hover .pin-outer { transform: scale(1.6); }
-.pin-inner { width: 6px; height: 6px; border-radius: 50%; }
-.pin-ring { position: absolute; inset: -4px; border-radius: 50%; border: 1px solid; opacity: 0.4; animation: pinring 2s ease-out infinite; }
-@keyframes pinring { 0%{transform:scale(1);opacity:0.4;} 100%{transform:scale(2.8);opacity:0;} }
-.pin-tooltip { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(5,6,8,0.95); border: 1px solid var(--border2); padding: 4px 10px; font-size: 9px; font-family: var(--mono); color: var(--text); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; letter-spacing: 0.05em; z-index: 30; }
-.map-pin:hover .pin-tooltip { opacity: 1; }
+/* Selected state banner */
+.state-banner { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); background: rgba(5,6,8,0.92); border: 1px solid var(--amber); padding: 6px 20px; font-family: var(--condensed); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; color: var(--amber); display: none; z-index: 10; cursor: pointer; white-space: nowrap; }
+.state-banner:hover { background: rgba(255,170,0,0.1); }
 
-/* Category colors */
-.cat-cryptid .pin-outer { background: rgba(255,170,0,0.2); } .cat-cryptid .pin-inner { background: var(--amber); } .cat-cryptid .pin-ring { border-color: var(--amber); }
-.cat-ghost .pin-outer { background: rgba(136,136,255,0.2); } .cat-ghost .pin-inner { background: #8888ff; } .cat-ghost .pin-ring { border-color: #8888ff; }
-.cat-ufo .pin-outer { background: rgba(0,255,136,0.2); } .cat-ufo .pin-inner { background: var(--green); } .cat-ufo .pin-ring { border-color: var(--green); }
-.cat-alien .pin-outer { background: rgba(68,255,170,0.2); } .cat-alien .pin-inner { background: #44ffaa; } .cat-alien .pin-ring { border-color: #44ffaa; }
-.cat-unexplained .pin-outer { background: rgba(0,170,255,0.2); } .cat-unexplained .pin-inner { background: var(--blue); } .cat-unexplained .pin-ring { border-color: var(--blue); }
-.cat-demonic .pin-outer { background: rgba(255,45,45,0.2); } .cat-demonic .pin-inner { background: var(--red); } .cat-demonic .pin-ring { border-color: var(--red); }
-.cat-humanoid .pin-outer { background: rgba(170,68,255,0.2); } .cat-humanoid .pin-inner { background: var(--purple); } .cat-humanoid .pin-ring { border-color: var(--purple); }
-.cat-atmospheric .pin-outer { background: rgba(255,221,68,0.2); } .cat-atmospheric .pin-inner { background: #ffdd44; } .cat-atmospheric .pin-ring { border-color: #ffdd44; }
-.cat-other .pin-outer { background: rgba(232,234,240,0.15); } .cat-other .pin-inner { background: var(--text2); } .cat-other .pin-ring { border-color: var(--text2); }
-
-/* Map legend */
-.map-legend { position: absolute; bottom: 1rem; left: 1rem; background: rgba(5,6,8,0.9); border: 1px solid var(--border2); padding: 0.6rem 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 1rem; z-index: 10; }
-.legend-item { display: flex; align-items: center; gap: 5px; font-size: 8px; color: var(--text3); letter-spacing: 0.08em; }
-.legend-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+/* Legend */
+.map-legend { position: absolute; bottom: 1rem; left: 1rem; background: rgba(5,6,8,0.9); border: 1px solid var(--border2); padding: 0.6rem 0.75rem; z-index: 10; }
+.legend-title { font-size: 8px; letter-spacing: 0.2em; color: var(--text3); margin-bottom: 6px; }
+.legend-bar { display: flex; align-items: center; gap: 8px; }
+.legend-gradient { width: 80px; height: 6px; background: linear-gradient(to right, rgba(255,45,45,0.1), rgba(255,45,45,0.4), rgba(255,45,45,0.8), #ff2d2d); border-radius: 3px; }
+.legend-labels { display: flex; justify-content: space-between; width: 80px; margin-top: 3px; }
+.legend-label { font-size: 7px; color: var(--text3); letter-spacing: 0.05em; }
 
 /* FEED */
 .feed-panel { background: var(--bg2); display: flex; flex-direction: column; overflow: hidden; }
 .feed-header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
 .feed-title { font-family: var(--condensed); font-size: 13px; font-weight: 700; letter-spacing: 0.15em; }
-.feed-count { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; }
+.feed-subtitle { font-size: 9px; color: var(--text3); letter-spacing: 0.08em; margin-top: 2px; }
+.feed-count { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; text-align: right; }
 .feed-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
-.feed-item { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; position: relative; padding-left: 1.25rem; }
+.feed-empty { padding: 3rem 1rem; text-align: center; color: var(--text3); font-size: 11px; letter-spacing: 0.1em; line-height: 1.8; }
+
+/* Feed items */
+.feed-item { border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; position: relative; overflow: hidden; }
 .feed-item:hover { background: var(--bg3); }
-.feed-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; }
-.feed-item.cryptid::before { background: var(--amber); }
-.feed-item.ghost::before { background: #8888ff; }
-.feed-item.ufo::before { background: var(--green); }
-.feed-item.alien::before { background: #44ffaa; }
-.feed-item.unexplained::before { background: var(--blue); }
-.feed-item.demonic::before { background: var(--red); }
-.feed-item.humanoid::before { background: var(--purple); }
-.feed-item.atmospheric::before { background: #ffdd44; }
-.feed-item.other::before { background: var(--text2); }
+.feed-item-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.feed-item-inner { padding: 0.85rem 1rem 0.85rem 1.25rem; }
 .feed-item-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
 .feed-cat { font-family: var(--condensed); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
-.feed-cat.cryptid { color: var(--amber); }
-.feed-cat.ghost { color: #8888ff; }
-.feed-cat.ufo { color: var(--green); }
-.feed-cat.alien { color: #44ffaa; }
-.feed-cat.unexplained { color: var(--blue); }
-.feed-cat.demonic { color: var(--red); }
-.feed-cat.humanoid { color: var(--purple); }
-.feed-cat.atmospheric { color: #ffdd44; }
-.feed-cat.other { color: var(--text2); }
 .feed-date { font-size: 9px; color: var(--text3); }
-.feed-location { font-size: 10px; color: var(--text2); margin-bottom: 4px; }
-.feed-desc { font-size: 11px; line-height: 1.5; color: var(--text3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.feed-img { width: 100%; height: 75px; object-fit: cover; margin-top: 7px; opacity: 0.7; }
-.feed-status { display: inline-block; font-size: 8px; letter-spacing: 0.12em; padding: 2px 6px; border: 1px solid; margin-top: 5px; }
+.feed-location { font-size: 10px; color: var(--text2); margin-bottom: 5px; }
+.feed-desc { font-size: 11px; line-height: 1.55; color: var(--text3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 6px; }
+.feed-img { width: 100%; height: 120px; object-fit: cover; opacity: 0.8; display: block; margin-bottom: 6px; }
+.feed-status { display: inline-block; font-size: 8px; letter-spacing: 0.12em; padding: 2px 7px; border: 1px solid; }
 .feed-status.pending { border-color: var(--amber); color: var(--amber); }
 .feed-status.verified { border-color: var(--green); color: var(--green); }
 .feed-status.unverified { border-color: var(--text3); color: var(--text3); }
 
 /* DETAIL MODAL */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
 .modal-overlay.open { display: flex; }
-.detail-modal { background: var(--bg2); border: 1px solid var(--border2); width: min(600px,100%); max-height: 90vh; overflow-y: auto; animation: modalIn 0.2s ease; }
+.detail-modal { background: var(--bg2); border: 1px solid var(--border2); width: min(620px,100%); max-height: 92vh; overflow-y: auto; animation: modalIn 0.2s ease; }
 @keyframes modalIn { from{opacity:0;transform:scale(0.97);} to{opacity:1;transform:scale(1);} }
-.detail-img { width: 100%; max-height: 260px; object-fit: cover; opacity: 0.85; display: block; }
+.detail-img-wrap { position: relative; }
+.detail-img { width: 100%; max-height: 300px; object-fit: cover; display: block; cursor: zoom-in; }
+.detail-img-expand { position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(0,0,0,0.7); border: 1px solid var(--border2); font-size: 9px; font-family: var(--mono); color: var(--text2); padding: 3px 8px; letter-spacing: 0.1em; pointer-events: none; }
 .detail-body { padding: 1.5rem; }
-.detail-cat { font-family: var(--condensed); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; margin-bottom: 5px; }
-.detail-title { font-family: var(--condensed); font-size: 24px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 8px; line-height: 1.15; }
-.detail-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.detail-meta-label { font-size: 8px; letter-spacing: 0.18em; color: var(--text3); margin-bottom: 2px; }
+.detail-cat { font-family: var(--condensed); font-size: 11px; font-weight: 700; letter-spacing: 0.25em; margin-bottom: 5px; }
+.detail-title { font-family: var(--condensed); font-size: 26px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 1rem; line-height: 1.15; }
+.detail-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem; padding: 0.75rem; background: var(--bg3); border: 1px solid var(--border); }
+.detail-meta-label { font-size: 8px; letter-spacing: 0.18em; color: var(--text3); margin-bottom: 3px; }
 .detail-meta-val { font-size: 11px; color: var(--text2); }
-.detail-desc { font-size: 13px; line-height: 1.8; color: var(--text2); margin-bottom: 1rem; }
-.detail-badge { display: inline-block; font-size: 9px; letter-spacing: 0.15em; padding: 4px 12px; border: 1px solid; font-family: var(--mono); margin-bottom: 1rem; }
+.detail-desc { font-size: 13px; line-height: 1.85; color: var(--text2); margin-bottom: 1.25rem; }
+.detail-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.detail-badge { display: inline-block; font-size: 9px; letter-spacing: 0.15em; padding: 5px 14px; border: 1px solid; font-family: var(--mono); }
 .detail-badge.pending { border-color: var(--amber); color: var(--amber); background: rgba(255,170,0,0.08); }
 .detail-badge.verified { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.08); }
 .detail-badge.unverified { border-color: var(--text3); color: var(--text3); }
-.detail-close-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--border2); color: var(--text2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; cursor: pointer; transition: all 0.12s; }
-.detail-close-btn:hover { border-color: var(--red); color: var(--red); }
+.detail-close { background: transparent; border: 1px solid var(--border2); color: var(--text2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; padding: 8px 20px; cursor: pointer; transition: all 0.12s; }
+.detail-close:hover { border-color: var(--red); color: var(--red); }
+
+/* Lightbox */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; }
+.lightbox-hint { position: absolute; top: 1rem; right: 1.5rem; font-size: 10px; font-family: var(--mono); color: rgba(232,234,240,0.4); letter-spacing: 0.12em; }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .main-layout { grid-template-columns: 1fr; grid-template-rows: 50vh auto; height: auto; }
-  .feed-panel { height: 50vh; }
+  .main-layout { grid-template-columns: 1fr; grid-template-rows: 48vh 1fr; height: auto; }
+  .feed-panel { height: 52vh; }
   .header-stats { display: none; }
   .site-header { padding: 0.6rem 1rem; gap: 1rem; }
   .logo-title { font-size: 22px; }
   .logo-sub { display: none; }
-  .filter-bar { top: 55px; padding: 0.4rem 0.75rem; overflow-x: auto; flex-wrap: nowrap; }
-  .filter-btn { font-size: 11px; padding: 3px 9px; }
+  .filter-bar { top: 54px; padding: 0.4rem 0.75rem; overflow-x: auto; flex-wrap: nowrap; }
+  .fbtn { font-size: 11px; padding: 3px 9px; }
   .map-legend { display: none; }
+  .detail-meta { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
 
+<!-- ALERT BAR -->
 <div class="alert-bar">
   <span class="alert-bar-label">⚡ LIVE</span>
   <div class="alert-bar-ticker">
     <span class="alert-bar-text">NEW: UFO formation — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp; NEW: Demonic entity — Salem, MA &nbsp;///&nbsp; NEW: Bigfoot tracks — Olympic Peninsula, WA &nbsp;///&nbsp; NEW: UFO formation — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp;</span>
     <span class="alert-bar-text">NEW: UFO formation — Phoenix, AZ — multiple witnesses &nbsp;///&nbsp; NEW: Cryptid encounter — Appalachian Trail, WV &nbsp;///&nbsp; NEW: Unexplained lights — Roswell, NM — ongoing &nbsp;///&nbsp; NEW: Ghost activity — Gettysburg, PA — audio captured &nbsp;///&nbsp; NEW: Demonic entity — Salem, MA &nbsp;///&nbsp; NEW: Bigfoot tracks — Olympic Peninsula, WA &nbsp;///&nbsp;</span>
   </div>
-  <span class="alert-bar-time" id="alert-time"></span>
+  <span class="alert-time" id="alert-time"></span>
 </div>
 
+<!-- HEADER -->
 <header class="site-header">
-  <div class="logo-wrap">
+  <div>
     <div class="logo-live"><div class="live-dot"></div>LIVE MONITORING</div>
     <div class="logo-title">REPORTED<span>.LIVE</span></div>
     <div class="logo-sub">US INCIDENT ACTIVITY MONITOR — COMMUNITY FIELD REPORTS</div>
@@ -226,61 +190,72 @@ body::before {
     <div class="hstat"><div class="hstat-num red" id="active-month">0</div><div class="hstat-label">THIS MONTH</div></div>
     <div class="hstat"><div class="hstat-num green" id="states-count">0</div><div class="hstat-label">STATES ACTIVE</div></div>
   </div>
-  <a href="GOOGLE_FORM_URL" target="_blank" class="header-report-btn">REPORT INCIDENT</a>
+  <a href="GOOGLE_FORM_URL" target="_blank" class="report-btn">REPORT INCIDENT</a>
 </header>
 
+<!-- FILTER BAR -->
 <div class="filter-bar">
   <span class="filter-label">FILTER //</span>
-  <button class="filter-btn all active" data-cat="all"><span class="filter-dot" style="background:var(--text)"></span>ALL</button>
-  <button class="filter-btn cryptid" data-cat="cryptid"><span class="filter-dot" style="background:var(--amber)"></span>CRYPTID</button>
-  <button class="filter-btn ghost" data-cat="ghost"><span class="filter-dot" style="background:#8888ff"></span>GHOST</button>
-  <button class="filter-btn ufo" data-cat="ufo"><span class="filter-dot" style="background:var(--green)"></span>UFO</button>
-  <button class="filter-btn alien" data-cat="alien"><span class="filter-dot" style="background:#44ffaa"></span>ALIEN</button>
-  <button class="filter-btn unexplained" data-cat="unexplained"><span class="filter-dot" style="background:var(--blue)"></span>UNEXPLAINED</button>
-  <button class="filter-btn demonic" data-cat="demonic"><span class="filter-dot" style="background:var(--red)"></span>DEMONIC</button>
-  <button class="filter-btn humanoid" data-cat="humanoid"><span class="filter-dot" style="background:var(--purple)"></span>HUMANOID</button>
-  <button class="filter-btn atmospheric" data-cat="atmospheric"><span class="filter-dot" style="background:#ffdd44"></span>ATMOSPHERIC</button>
-  <button class="filter-btn other" data-cat="other"><span class="filter-dot" style="background:var(--text2)"></span>OTHER</button>
+  <button class="fbtn all active" data-cat="all"><span class="fdot" style="background:var(--text)"></span>ALL</button>
+  <button class="fbtn cryptid" data-cat="cryptid"><span class="fdot" style="background:var(--amber)"></span>CRYPTID</button>
+  <button class="fbtn ghost" data-cat="ghost"><span class="fdot" style="background:#8888ff"></span>GHOST</button>
+  <button class="fbtn ufo" data-cat="ufo"><span class="fdot" style="background:var(--green)"></span>UFO</button>
+  <button class="fbtn alien" data-cat="alien"><span class="fdot" style="background:#44ffaa"></span>ALIEN</button>
+  <button class="fbtn unexplained" data-cat="unexplained"><span class="fdot" style="background:var(--blue)"></span>UNEXPLAINED</button>
+  <button class="fbtn demonic" data-cat="demonic"><span class="fdot" style="background:var(--red)"></span>DEMONIC</button>
+  <button class="fbtn humanoid" data-cat="humanoid"><span class="fdot" style="background:var(--purple)"></span>HUMANOID</button>
+  <button class="fbtn atmospheric" data-cat="atmospheric"><span class="fdot" style="background:#ffdd44"></span>ATMOSPHERIC</button>
+  <button class="fbtn other" data-cat="other"><span class="fdot" style="background:var(--text2)"></span>OTHER</button>
 </div>
 
+<!-- MAIN -->
 <div class="main-layout">
   <div class="map-section">
     <div class="map-header">
-      <span class="map-title">// LIVE INCIDENT MAP — UNITED STATES //</span>
-      <span class="map-hint">CLICK PINS TO VIEW REPORTS</span>
+      <span class="map-title">// LIVE INCIDENT HEATMAP — UNITED STATES //</span>
+      <span class="map-hint">CLICK A STATE TO FILTER REPORTS</span>
     </div>
-    <div id="map-svg-container"></div>
-    <div id="map-pins-container" style="position:absolute;inset:0;pointer-events:none;top:0;left:0;width:100%;height:100%;"></div>
+    <div id="map-container"></div>
+    <div class="state-tooltip" id="state-tooltip"></div>
+    <div class="state-banner" id="state-banner" onclick="clearStateFilter()"></div>
     <div class="map-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>CRYPTID</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#8888ff"></div>GHOST</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>UFO</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#44ffaa"></div>ALIEN</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>UNEXPLAINED</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>DEMONIC</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>HUMANOID</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#ffdd44"></div>ATMOSPHERIC</div>
+      <div class="legend-title">INCIDENT DENSITY</div>
+      <div class="legend-bar">
+        <div class="legend-gradient"></div>
+      </div>
+      <div class="legend-labels">
+        <span class="legend-label">LOW</span>
+        <span class="legend-label">HIGH</span>
+      </div>
     </div>
   </div>
 
   <div class="feed-panel">
     <div class="feed-header">
-      <span class="feed-title">// INCIDENT FEED</span>
-      <span class="feed-count" id="feed-count">0 REPORTS</span>
+      <div>
+        <div class="feed-title" id="feed-title">// INCIDENT FEED</div>
+        <div class="feed-subtitle" id="feed-subtitle">ALL REPORTS — NEWEST FIRST</div>
+      </div>
+      <div class="feed-count" id="feed-count">0 REPORTS</div>
     </div>
     <div class="feed-list" id="feed-list"></div>
   </div>
 </div>
 
+<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="detail-overlay">
   <div class="detail-modal" id="detail-content"></div>
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="full size">
+  <div class="lightbox-hint">CLICK ANYWHERE TO CLOSE</div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json" type="application/json" id="us-atlas-data"></script>
 <script src="reports.js"></script>
 <script>
-// ── CATEGORY COLORS ──
 var catColors = {
   cryptid:'#ffaa00', ghost:'#8888ff', ufo:'#00ff88',
   alien:'#44ffaa', unexplained:'#00aaff', demonic:'#ff2d2d',
@@ -288,7 +263,34 @@ var catColors = {
 };
 
 var activeFilter = 'all';
-var projection, svgWidth, svgHeight;
+var activeState = null;
+var projection;
+
+// State FIPS to abbreviation map
+var fipsToState = {
+  '01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'CT',
+  '10':'DE','11':'DC','12':'FL','13':'GA','15':'HI','16':'ID','17':'IL',
+  '18':'IN','19':'IA','20':'KS','21':'KY','22':'LA','23':'ME','24':'MD',
+  '25':'MA','26':'MI','27':'MN','28':'MS','29':'MO','30':'MT','31':'NE',
+  '32':'NV','33':'NH','34':'NJ','35':'NM','36':'NY','37':'NC','38':'ND',
+  '39':'OH','40':'OK','41':'OR','42':'PA','44':'RI','45':'SC','46':'SD',
+  '47':'TN','48':'TX','49':'UT','50':'VT','51':'VA','53':'WA','54':'WV',
+  '55':'WI','56':'WY'
+};
+
+var stateNames = {
+  'AL':'Alabama','AK':'Alaska','AZ':'Arizona','AR':'Arkansas','CA':'California',
+  'CO':'Colorado','CT':'Connecticut','DE':'Delaware','FL':'Florida','GA':'Georgia',
+  'HI':'Hawaii','ID':'Idaho','IL':'Illinois','IN':'Indiana','IA':'Iowa',
+  'KS':'Kansas','KY':'Kentucky','LA':'Louisiana','ME':'Maine','MD':'Maryland',
+  'MA':'Massachusetts','MI':'Michigan','MN':'Minnesota','MS':'Mississippi',
+  'MO':'Missouri','MT':'Montana','NE':'Nebraska','NV':'Nevada','NH':'New Hampshire',
+  'NJ':'New Jersey','NM':'New Mexico','NY':'New York','NC':'North Carolina',
+  'ND':'North Dakota','OH':'Ohio','OK':'Oklahoma','OR':'Oregon','PA':'Pennsylvania',
+  'RI':'Rhode Island','SC':'South Carolina','SD':'South Dakota','TN':'Tennessee',
+  'TX':'Texas','UT':'Utah','VT':'Vermont','VA':'Virginia','WA':'Washington',
+  'WV':'West Virginia','WI':'Wisconsin','WY':'Wyoming'
+};
 
 // ── CLOCK ──
 function updateClock() {
@@ -302,162 +304,187 @@ updateClock();
 function updateStats() {
   document.getElementById('total-reports').textContent = reports.length;
   var now = new Date();
-  var thisMonth = reports.filter(function(r) {
+  var thisMonth = reports.filter(function(r){
     var d = new Date(r.date);
-    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
   }).length;
   document.getElementById('active-month').textContent = thisMonth;
   var states = new Set(reports.map(function(r){ return r.state; }));
   document.getElementById('states-count').textContent = states.size;
-  document.getElementById('feed-count').textContent = reports.length + ' REPORTS';
+}
+
+// ── GET FILTERED REPORTS ──
+function getFiltered() {
+  var list = reports;
+  if (activeFilter !== 'all') list = list.filter(function(r){ return r.category === activeFilter; });
+  if (activeState) list = list.filter(function(r){ return r.state === activeState; });
+  return list;
+}
+
+// ── COUNTS PER STATE ──
+function getStateCounts() {
+  var counts = {};
+  var list = activeFilter === 'all' ? reports : reports.filter(function(r){ return r.category === activeFilter; });
+  list.forEach(function(r){ counts[r.state] = (counts[r.state]||0) + 1; });
+  return counts;
 }
 
 // ── MAP ──
 function initMap() {
-  var container = document.getElementById('map-svg-container');
+  var container = document.getElementById('map-container');
   var rect = container.parentElement.getBoundingClientRect();
-  svgWidth = rect.width;
-  svgHeight = rect.height;
+  var w = rect.width, h = rect.height;
 
-  var svg = d3.select('#map-svg-container')
+  var svg = d3.select('#map-container')
     .append('svg')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
+    .attr('width', w)
+    .attr('height', h);
 
-  // Background
-  svg.append('rect').attr('width', svgWidth).attr('height', svgHeight).attr('fill', '#050608');
+  svg.append('rect').attr('width',w).attr('height',h).attr('fill','#050608');
 
-  // Grid lines
-  svg.append('line').attr('x1',0).attr('y1',svgHeight/2).attr('x2',svgWidth).attr('y2',svgHeight/2).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
-  svg.append('line').attr('x1',svgWidth/2).attr('y1',0).attr('x2',svgWidth/2).attr('y2',svgHeight).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
-
-  projection = d3.geoAlbersUsa()
-    .scale(svgWidth * 1.25)
-    .translate([svgWidth / 2, svgHeight / 2]);
-
+  projection = d3.geoAlbersUsa().scale(w*1.28).translate([w/2, h/2]);
   var path = d3.geoPath().projection(projection);
+  var tooltip = document.getElementById('state-tooltip');
 
   fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
     .then(function(r){ return r.json(); })
     .then(function(us) {
-      var states = topojson.feature(us, us.objects.states);
+      var statesGeo = topojson.feature(us, us.objects.states);
+
+      // Draw states
       svg.selectAll('.state')
-        .data(states.features)
+        .data(statesGeo.features)
         .enter()
         .append('path')
-        .attr('class', 'state')
+        .attr('class', 'state-path')
         .attr('d', path)
+        .attr('fill', '#0a1220')
+        .attr('stroke', '#1a2840')
+        .attr('stroke-width', 0.5)
+        .attr('cursor', 'pointer')
+        .on('mousemove', function(event, d) {
+          var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
+          var counts = getStateCounts();
+          var count = counts[abbr] || 0;
+          tooltip.style.display = 'block';
+          tooltip.style.left = (event.offsetX + 12) + 'px';
+          tooltip.style.top = (event.offsetY - 10) + 'px';
+          tooltip.innerHTML = (stateNames[abbr]||abbr) + ' — ' + count + ' REPORT' + (count!==1?'S':'');
+        })
+        .on('mouseleave', function() {
+          tooltip.style.display = 'none';
+        })
         .on('click', function(event, d) {
-          d3.selectAll('.state').classed('active', false);
-          d3.select(this).classed('active', true);
+          var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
+          if (!abbr) return;
+          if (activeState === abbr) {
+            clearStateFilter();
+          } else {
+            activeState = abbr;
+            updateHeatmap();
+            renderFeed();
+            var banner = document.getElementById('state-banner');
+            var counts = getStateCounts();
+            var count = counts[abbr] || 0;
+            banner.style.display = 'block';
+            banner.textContent = '📍 ' + (stateNames[abbr]||abbr).toUpperCase() + ' — ' + count + ' REPORT' + (count!==1?'S':'') + ' — CLICK TO CLEAR';
+          }
         });
 
-      // State borders
+      // Draw borders
       svg.append('path')
-        .datum(topojson.mesh(us, us.objects.states, function(a,b){ return a !== b; }))
-        .attr('fill', 'none')
-        .attr('stroke', '#1a2840')
-        .attr('stroke-width', '0.5')
+        .datum(topojson.mesh(us, us.objects.states, function(a,b){ return a!==b; }))
+        .attr('fill','none')
+        .attr('stroke','#1a2840')
+        .attr('stroke-width',0.5)
         .attr('d', path);
 
-      renderPins();
-    })
-    .catch(function() {
-      // Fallback if fetch fails
-      svg.append('text').attr('x', svgWidth/2).attr('y', svgHeight/2).attr('text-anchor','middle').attr('fill','rgba(232,234,240,0.2)').attr('font-family','monospace').attr('font-size','12px').text('MAP LOADING...');
+      updateHeatmap();
     });
 }
 
-// ── PINS ──
-// Approximate lat/lng centers for each state
-var stateCenters = {
-  AL:{lat:32.8,lng:-86.8}, AK:{lat:61.4,lng:-152.0}, AZ:{lat:34.3,lng:-111.1},
-  AR:{lat:34.9,lng:-92.4}, CA:{lat:36.8,lng:-119.4}, CO:{lat:39.0,lng:-105.5},
-  CT:{lat:41.6,lng:-72.7}, DE:{lat:38.9,lng:-75.5}, FL:{lat:27.8,lng:-81.5},
-  GA:{lat:32.2,lng:-83.4}, HI:{lat:20.2,lng:-156.4}, ID:{lat:44.4,lng:-114.5},
-  IL:{lat:40.0,lng:-89.2}, IN:{lat:39.9,lng:-86.3}, IA:{lat:42.1,lng:-93.2},
-  KS:{lat:38.5,lng:-98.4}, KY:{lat:37.7,lng:-84.9}, LA:{lat:30.5,lng:-91.8},
-  ME:{lat:44.7,lng:-69.4}, MD:{lat:39.1,lng:-76.8}, MA:{lat:42.2,lng:-71.5},
-  MI:{lat:44.3,lng:-84.5}, MN:{lat:46.4,lng:-93.1}, MS:{lat:32.7,lng:-89.7},
-  MO:{lat:38.3,lng:-92.5}, MT:{lat:47.0,lng:-110.5}, NE:{lat:41.5,lng:-99.9},
-  NV:{lat:38.5,lng:-117.1}, NH:{lat:43.7,lng:-71.6}, NJ:{lat:40.1,lng:-74.5},
-  NM:{lat:34.8,lng:-106.2}, NY:{lat:43.0,lng:-75.5}, NC:{lat:35.5,lng:-79.4},
-  ND:{lat:47.5,lng:-100.5}, OH:{lat:40.4,lng:-82.8}, OK:{lat:35.6,lng:-97.5},
-  OR:{lat:43.9,lng:-120.6}, PA:{lat:40.6,lng:-77.2}, RI:{lat:41.7,lng:-71.5},
-  SC:{lat:33.9,lng:-80.9}, SD:{lat:44.4,lng:-100.2}, TN:{lat:35.9,lng:-86.7},
-  TX:{lat:31.5,lng:-99.3}, UT:{lat:39.3,lng:-111.1}, VT:{lat:44.0,lng:-72.7},
-  VA:{lat:37.5,lng:-79.0}, WA:{lat:47.4,lng:-120.5}, WV:{lat:38.6,lng:-80.6},
-  WI:{lat:44.3,lng:-89.8}, WY:{lat:43.0,lng:-107.6}, DC:{lat:38.9,lng:-77.0}
-};
+function updateHeatmap() {
+  var counts = getStateCounts();
+  var maxCount = Math.max(1, d3.max(Object.values(counts)) || 1);
 
-function renderPins() {
-  var container = document.getElementById('map-pins-container');
-  var list = activeFilter === 'all' ? reports : reports.filter(function(r){ return r.category === activeFilter; });
-
-  if (!projection) { setTimeout(renderPins, 500); return; }
-
-  container.innerHTML = '';
-  container.style.position = 'absolute';
-  container.style.top = '0';
-  container.style.left = '0';
-  container.style.width = '100%';
-  container.style.height = '100%';
-  container.style.pointerEvents = 'none';
-
-  list.forEach(function(r) {
-    var center = stateCenters[r.state];
-    if (!center) return;
-
-    // Slight random offset so pins in same state don't stack
-    var offsetLng = (Math.sin(r.id * 3.7) * 0.8);
-    var offsetLat = (Math.cos(r.id * 5.3) * 0.5);
-    var coords = projection([center.lng + offsetLng, center.lat + offsetLat]);
-    if (!coords) return;
-
-    var pct_x = (coords[0] / svgWidth) * 100;
-    var pct_y = (coords[1] / svgHeight) * 100;
-
-    var pin = document.createElement('div');
-    pin.className = 'map-pin cat-' + r.category;
-    pin.style.left = pct_x + '%';
-    pin.style.top = pct_y + '%';
-    pin.style.pointerEvents = 'all';
-    pin.innerHTML = '<div class="pin-outer"><div class="pin-inner"></div><div class="pin-ring"></div></div>'
-      + '<div class="pin-tooltip">' + r.category.toUpperCase() + ' — ' + r.city + ', ' + r.state + '</div>';
-    pin.addEventListener('click', function(){ openDetail(r.id); });
-    container.appendChild(pin);
+  d3.selectAll('.state-path').attr('fill', function(d) {
+    var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
+    var count = counts[abbr] || 0;
+    var isSelected = activeState && activeState === abbr;
+    if (isSelected) return 'rgba(255,170,0,0.35)';
+    if (count === 0) return '#0a1220';
+    var intensity = count / maxCount;
+    var r = Math.round(255 * Math.min(1, intensity * 1.2));
+    var g = Math.round(45 * (1 - intensity));
+    var b = Math.round(45 * (1 - intensity));
+    var a = 0.15 + (intensity * 0.7);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+  }).attr('stroke', function(d) {
+    var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
+    return (activeState && activeState === abbr) ? 'rgba(255,170,0,0.8)' : '#1a2840';
+  }).attr('stroke-width', function(d) {
+    var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
+    return (activeState && activeState === abbr) ? 1.5 : 0.5;
   });
 }
 
-// ── FILTER ──
-document.querySelectorAll('.filter-btn').forEach(function(btn) {
+function clearStateFilter() {
+  activeState = null;
+  document.getElementById('state-banner').style.display = 'none';
+  updateHeatmap();
+  renderFeed();
+}
+
+// ── FILTER BUTTONS ──
+document.querySelectorAll('.fbtn').forEach(function(btn) {
   btn.addEventListener('click', function() {
     activeFilter = this.getAttribute('data-cat');
-    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.fbtn').forEach(function(b){ b.classList.remove('active'); });
     this.classList.add('active');
+    updateHeatmap();
     renderFeed();
-    renderPins();
   });
 });
 
 // ── FEED ──
 function renderFeed() {
-  var list = activeFilter === 'all' ? reports : reports.filter(function(r){ return r.category === activeFilter; });
+  var list = getFiltered();
+  var sorted = list.slice().sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+
+  // Update header
+  var title = activeState ? ('// ' + (stateNames[activeState]||activeState).toUpperCase()) : '// INCIDENT FEED';
+  var sub = activeState
+    ? (list.length + ' REPORT' + (list.length!==1?'S':'') + ' IN THIS STATE')
+    : ('ALL REPORTS — NEWEST FIRST');
+  document.getElementById('feed-title').textContent = title;
+  document.getElementById('feed-subtitle').textContent = sub;
+  document.getElementById('feed-count').textContent = list.length + ' REPORTS';
+
   var el = document.getElementById('feed-list');
-  if (!list.length) {
-    el.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text3);font-size:11px;letter-spacing:0.1em;">NO REPORTS MATCH FILTER</div>';
+  if (!sorted.length) {
+    el.innerHTML = '<div class="feed-empty">'
+      + (activeState ? '📍 NO REPORTS IN ' + (stateNames[activeState]||activeState).toUpperCase() + ' YET' : 'NO REPORTS MATCH CURRENT FILTER')
+      + '<br><br>Be the first to submit a report.</div>';
     return;
   }
-  var sorted = list.slice().sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+
+  var statusLabels = { pending:'PENDING', verified:'VERIFIED', unverified:'UNVERIFIED' };
   el.innerHTML = sorted.map(function(r) {
+    var color = catColors[r.category] || 'var(--text2)';
     var d = new Date(r.date);
     var dateStr = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
-    return '<div class="feed-item ' + r.category + '" onclick="openDetail(' + r.id + ')">'
-      + '<div class="feed-item-top"><span class="feed-cat ' + r.category + '">' + r.category.toUpperCase() + '</span><span class="feed-date">' + dateStr + '</span></div>'
+    return '<div class="feed-item" onclick="openDetail(' + r.id + ')">'
+      + '<div class="feed-item-accent" style="background:' + color + '"></div>'
+      + '<div class="feed-item-inner">'
+      + '<div class="feed-item-top">'
+      + '<span class="feed-cat" style="color:' + color + '">' + r.category.toUpperCase() + '</span>'
+      + '<span class="feed-date">' + dateStr + '</span>'
+      + '</div>'
       + '<div class="feed-location">📍 ' + r.city + ', ' + r.state + '</div>'
+      + (r.image ? '<img class="feed-img" src="' + r.image + '" alt="sighting photo">' : '')
       + '<div class="feed-desc">' + r.description + '</div>'
-      + (r.image ? '<img class="feed-img" src="' + r.image + '" alt="sighting">' : '')
-      + '<div class="feed-status ' + (r.status||'pending') + '">' + (r.status||'PENDING').toUpperCase() + '</div>'
+      + '<div class="feed-status ' + (r.status||'pending') + '">' + (statusLabels[r.status]||'PENDING') + '</div>'
+      + '</div>'
       + '</div>';
   }).join('');
 }
@@ -472,18 +499,22 @@ function openDetail(id) {
   var dateStr = d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}).toUpperCase();
   var statusLabels = { pending:'PENDING REVIEW', verified:'FIELD VERIFIED', unverified:'UNVERIFIED' };
   document.getElementById('detail-content').innerHTML =
-    (r.image ? '<img class="detail-img" src="' + r.image + '" alt="sighting">' : '')
+    (r.image
+      ? '<div class="detail-img-wrap"><img class="detail-img" src="' + r.image + '" alt="sighting" onclick="openLightbox(\'' + r.image + '\')"><div class="detail-img-expand">🔍 CLICK TO EXPAND</div></div>'
+      : '')
     + '<div class="detail-body">'
-    + '<div class="detail-cat" style="color:' + color + '">' + r.category.toUpperCase() + ' INCIDENT</div>'
-    + '<div class="detail-title">' + (r.title || r.city + ', ' + r.state) + '</div>'
+    + '<div class="detail-cat" style="color:' + color + '">' + r.category.toUpperCase() + ' INCIDENT — ' + r.state + '</div>'
+    + '<div class="detail-title">' + (r.title||r.city+', '+r.state) + '</div>'
     + '<div class="detail-meta">'
     + '<div><div class="detail-meta-label">LOCATION</div><div class="detail-meta-val">📍 ' + r.city + ', ' + r.state + '</div></div>'
     + '<div><div class="detail-meta-label">DATE</div><div class="detail-meta-val">' + dateStr + '</div></div>'
     + '<div><div class="detail-meta-label">FILED BY</div><div class="detail-meta-val">' + (r.reporter||'ANONYMOUS') + '</div></div>'
     + '</div>'
     + '<p class="detail-desc">' + r.description + '</p>'
+    + '<div class="detail-footer">'
     + '<div class="detail-badge ' + (r.status||'pending') + '">' + (statusLabels[r.status]||'PENDING REVIEW') + '</div>'
-    + '<button class="detail-close-btn" onclick="closeDetail()">✕ CLOSE REPORT</button>'
+    + '<button class="detail-close" onclick="closeDetail()">✕ CLOSE REPORT</button>'
+    + '</div>'
     + '</div>';
   document.getElementById('detail-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -495,11 +526,25 @@ function closeDetail() {
 }
 
 document.getElementById('detail-overlay').addEventListener('click', function(e){
-  if (e.target === this) closeDetail();
+  if (e.target===this) closeDetail();
 });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDetail(); });
 
-// Need topojson
+// ── LIGHTBOX ──
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e){
+  if (e.key==='Escape'){ closeDetail(); closeLightbox(); }
+});
+
+// ── INIT ──
 var topoScript = document.createElement('script');
 topoScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js';
 topoScript.onload = function() {
