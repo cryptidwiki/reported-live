@@ -351,17 +351,25 @@ function getStateCounts() {
 // ── MAP ──
 function initMap() {
   var container = document.getElementById('map-container');
-  var rect = container.parentElement.getBoundingClientRect();
-  var w = rect.width, h = rect.height;
+
+  // Use fixed viewBox dimensions — SVG scales automatically via CSS
+  var w = 960, h = 600;
 
   var svg = d3.select('#map-container')
     .append('svg')
-    .attr('width', w)
-    .attr('height', h);
+    .attr('viewBox', '0 0 ' + w + ' ' + h)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', '100%')
+    .style('display', 'block');
 
   svg.append('rect').attr('width',w).attr('height',h).attr('fill','#050608');
 
-  projection = d3.geoAlbersUsa().scale(w*1.26).translate([w/2, h/2]);
+  // Grid lines
+  svg.append('line').attr('x1',0).attr('y1',h/2).attr('x2',w).attr('y2',h/2).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
+  svg.append('line').attr('x1',w/2).attr('y1',0).attr('x2',w/2).attr('y2',h).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
+
+  projection = d3.geoAlbersUsa().scale(1280).translate([w/2, h/2]);
   var path = d3.geoPath().projection(projection);
   var tooltip = document.getElementById('state-tooltip');
 
@@ -385,9 +393,11 @@ function initMap() {
           var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
           var counts = getStateCounts();
           var count = counts[abbr] || 0;
+          var mapSection = document.querySelector('.map-section');
+          var rect = mapSection.getBoundingClientRect();
           tooltip.style.display = 'block';
-          tooltip.style.left = (event.offsetX + 12) + 'px';
-          tooltip.style.top = (event.offsetY - 10) + 'px';
+          tooltip.style.left = (event.clientX - rect.left + 12) + 'px';
+          tooltip.style.top = (event.clientY - rect.top - 10) + 'px';
           tooltip.innerHTML = (stateNames[abbr]||abbr) + ' — ' + count + ' REPORT' + (count!==1?'S':'');
         })
         .on('mouseleave', function() {
