@@ -496,7 +496,6 @@ function renderFeed() {
       + '<div class="feed-location">📍 ' + r.city + ', ' + r.state + '</div>'
       + (r.image ? '<img class="feed-img" src="' + r.image + '" alt="sighting photo">' : '')
       + '<div class="feed-desc">' + r.description + '</div>'
-      + '<div class="feed-status ' + (r.status||'pending') + '">' + (statusLabels[r.status]||'PENDING') + '</div>'
       + '</div>'
       + '</div>';
   }).join('');
@@ -525,7 +524,6 @@ function openDetail(id) {
     + '</div>'
     + '<p class="detail-desc">' + r.description + '</p>'
     + '<div class="detail-footer">'
-    + '<div class="detail-badge ' + (r.status||'pending') + '">' + (statusLabels[r.status]||'PENDING REVIEW') + '</div>'
     + '<button class="detail-close" onclick="closeDetail()">✕ CLOSE REPORT</button>'
     + '</div>'
     + '</div>';
