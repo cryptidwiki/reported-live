@@ -30,7 +30,7 @@ var reports = [
     date: "2026-05-12",
     description: "Witnessed a large winged figure hovering near the top of the Willis Tower at approximately 11:45pm. It did not move for several minutes before ascending vertically and disappearing. Three other people on the street saw it. The eyes were red and visible from at least 200 feet below. This is the third reported sighting in Chicago this year.",
     reporter: "anonymous_witness_4471",
-    image: "images/moth1.png"
+    image: "/reported-live/images/moth1.png"
   },
   {
     id: 2,
