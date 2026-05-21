@@ -25,7 +25,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: var(--mono); min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
-body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 9999; }
+body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 9999; }
 
 /* ALERT BAR */
 .alert-bar { background: var(--red); padding: 5px 1.5rem; display: flex; align-items: center; gap: 1rem; overflow: hidden; }
@@ -99,10 +99,18 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 
 /* FEED */
 .feed-panel { background: var(--bg2); display: flex; flex-direction: column; overflow: hidden; }
-.feed-header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.feed-header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.feed-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
 .feed-title { font-family: var(--condensed); font-size: 13px; font-weight: 700; letter-spacing: 0.15em; }
 .feed-subtitle { font-size: 9px; color: var(--text3); letter-spacing: 0.08em; margin-top: 2px; }
 .feed-count { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; text-align: right; }
+.feed-search-wrap { position: relative; margin-bottom: 0.5rem; }
+.feed-search { width: 100%; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); font-family: var(--mono); font-size: 11px; padding: 6px 10px 6px 28px; outline: none; letter-spacing: 0.04em; }
+.feed-search::placeholder { color: var(--text3); }
+.feed-search:focus { border-color: var(--red); }
+.feed-search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--text3); pointer-events: none; }
+.feed-sort { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); font-family: var(--mono); font-size: 10px; padding: 5px 8px; outline: none; cursor: pointer; letter-spacing: 0.05em; }
+.feed-sort option { background: var(--bg3); }
 .feed-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
 .feed-empty { padding: 3rem 1rem; text-align: center; color: var(--text3); font-size: 11px; letter-spacing: 0.1em; line-height: 1.8; }
 
@@ -122,7 +130,15 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 .feed-status.verified { border-color: var(--green); color: var(--green); }
 .feed-status.unverified { border-color: var(--text3); color: var(--text3); }
 
-/* DETAIL MODAL */
+/* FORM MODAL */
+.form-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
+.form-modal-overlay.open { display: flex; }
+.form-modal { background: var(--bg2); border: 1px solid var(--border2); width: min(640px,100%); max-height: 92vh; overflow: hidden; display: flex; flex-direction: column; animation: modalIn 0.2s ease; }
+.form-modal-header { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.form-modal-title { font-family: var(--condensed); font-size: 15px; font-weight: 700; letter-spacing: 0.12em; }
+.form-modal-close { background: transparent; border: 1px solid var(--border2); color: var(--text); font-family: var(--mono); font-size: 10px; padding: 4px 12px; cursor: pointer; letter-spacing: 0.1em; transition: all 0.12s; }
+.form-modal-close:hover { border-color: var(--red); color: var(--red); }
+.form-modal iframe { flex: 1; border: none; width: 100%; min-height: 500px; background: white; }
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
 .modal-overlay.open { display: flex; }
 .detail-modal { background: var(--bg2); border: 1px solid var(--border2); width: min(620px,100%); max-height: 92vh; overflow-y: auto; animation: modalIn 0.2s ease; }
@@ -196,7 +212,7 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
     <div class="hstat"><div class="hstat-num red" id="active-month">0</div><div class="hstat-label">THIS MONTH</div></div>
     <div class="hstat"><div class="hstat-num green" id="states-count">0</div><div class="hstat-label">STATES ACTIVE</div></div>
   </div>
-  <a href="https://forms.gle/gdE8ZopaG8RZG2y88" target="_blank" class="report-btn">REPORT INCIDENT</a>
+  <button onclick="openForm()" class="report-btn">REPORT INCIDENT</button>
 </header>
 
 <!-- FILTER BAR -->
@@ -241,13 +257,36 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 
   <div class="feed-panel">
     <div class="feed-header">
-      <div>
-        <div class="feed-title" id="feed-title">// INCIDENT FEED</div>
-        <div class="feed-subtitle" id="feed-subtitle">ALL REPORTS — NEWEST FIRST</div>
+      <div class="feed-header-top">
+        <div>
+          <div class="feed-title" id="feed-title">// INCIDENT FEED</div>
+          <div class="feed-subtitle" id="feed-subtitle">ALL REPORTS — NEWEST FIRST</div>
+        </div>
+        <div class="feed-count" id="feed-count">0 REPORTS</div>
       </div>
-      <div class="feed-count" id="feed-count">0 REPORTS</div>
+      <div class="feed-search-wrap">
+        <span class="feed-search-icon">⌕</span>
+        <input type="text" class="feed-search" id="feed-search" placeholder="SEARCH REPORTS, CITIES, STATES...">
+      </div>
+      <select class="feed-sort" id="feed-sort">
+        <option value="newest">SORT: NEWEST FIRST</option>
+        <option value="oldest">SORT: OLDEST FIRST</option>
+        <option value="category">SORT: BY CATEGORY</option>
+        <option value="state">SORT: BY STATE</option>
+      </select>
     </div>
     <div class="feed-list" id="feed-list"></div>
+  </div>
+</div>
+
+<!-- FORM MODAL -->
+<div class="form-modal-overlay" id="form-overlay">
+  <div class="form-modal">
+    <div class="form-modal-header">
+      <div class="form-modal-title">// SUBMIT INCIDENT REPORT</div>
+      <button class="form-modal-close" onclick="closeForm()">✕ CLOSE</button>
+    </div>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf_gdE8ZopaG8RZG2y88/viewform?embedded=true" frameborder="0">Loading form...</iframe>
   </div>
 </div>
 
@@ -332,11 +371,45 @@ function updateStats() {
   document.getElementById('states-count').textContent = states.size;
 }
 
+// ── FORM ──
+function openForm() {
+  document.getElementById('form-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeForm() {
+  document.getElementById('form-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('form-overlay').addEventListener('click', function(e){
+  if (e.target === this) closeForm();
+});
+
+// ── SEARCH & SORT ──
+var searchQuery = '';
+var sortMode = 'newest';
+
+document.getElementById('feed-search').addEventListener('input', function(){
+  searchQuery = this.value.toLowerCase();
+  renderFeed();
+});
+
+document.getElementById('feed-sort').addEventListener('change', function(){
+  sortMode = this.value;
+  renderFeed();
+});
+
 // ── GET FILTERED REPORTS ──
 function getFiltered() {
   var list = reports;
   if (activeFilter !== 'all') list = list.filter(function(r){ return r.category === activeFilter; });
   if (activeState) list = list.filter(function(r){ return r.state === activeState; });
+  if (searchQuery) list = list.filter(function(r){
+    return (r.title||'').toLowerCase().includes(searchQuery)
+      || (r.description||'').toLowerCase().includes(searchQuery)
+      || (r.city||'').toLowerCase().includes(searchQuery)
+      || (r.state||'').toLowerCase().includes(searchQuery)
+      || (r.category||'').toLowerCase().includes(searchQuery);
+  });
   return list;
 }
 
@@ -489,7 +562,12 @@ document.querySelectorAll('.fbtn').forEach(function(btn) {
 // ── FEED ──
 function renderFeed() {
   var list = getFiltered();
-  var sorted = list.slice().sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+  var sorted = list.slice().sort(function(a,b){
+    if (sortMode === 'oldest') return new Date(a.date) - new Date(b.date);
+    if (sortMode === 'category') return a.category.localeCompare(b.category);
+    if (sortMode === 'state') return a.state.localeCompare(b.state);
+    return new Date(b.date) - new Date(a.date); // newest default
+  });
 
   // Update header
   var title = activeState ? ('// ' + (stateNames[activeState]||activeState).toUpperCase()) : '// INCIDENT FEED';
@@ -579,7 +657,7 @@ function closeLightbox() {
 }
 
 document.addEventListener('keydown', function(e){
-  if (e.key==='Escape'){ closeDetail(); closeLightbox(); }
+  if (e.key==='Escape'){ closeDetail(); closeLightbox(); closeForm(); }
 });
 
 // ── INIT ──
