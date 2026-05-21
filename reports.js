@@ -53,7 +53,7 @@ var reports = [
     date: "2026-04-28",
     description: "During an evening tour of the battlefield, our group of eight people all simultaneously saw a figure in period military clothing standing near the treeline. When our guide shone a light on it, it vanished. The temperature dropped approximately 20 degrees in that spot. Our audio recorder captured sounds consistent with distant cannon fire despite no reenactments being scheduled.",
     reporter: "battlefield_tour_guide",
-    image: ""
+    image: "images/ghost.png"
   },
   {
     id: 4,
