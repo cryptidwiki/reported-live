@@ -138,7 +138,18 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 .form-modal-title { font-family: var(--condensed); font-size: 15px; font-weight: 700; letter-spacing: 0.12em; }
 .form-modal-close { background: transparent; border: 1px solid var(--border2); color: var(--text); font-family: var(--mono); font-size: 10px; padding: 4px 12px; cursor: pointer; letter-spacing: 0.1em; transition: all 0.12s; }
 .form-modal-close:hover { border-color: var(--red); color: var(--red); }
-.form-modal iframe { flex: 1; border: none; width: 100%; min-height: 500px; background: white; }
+/* FORM FIELDS */
+.form-field { margin-bottom: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 100px; gap: 0.75rem; }
+.form-label { display: block; font-size: 9px; letter-spacing: 0.2em; color: var(--text3); margin-bottom: 5px; }
+.form-input { width: 100%; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); font-family: var(--mono); font-size: 12px; padding: 8px 10px; outline: none; letter-spacing: 0.03em; transition: border-color 0.12s; appearance: none; }
+.form-input:focus { border-color: var(--red); }
+.form-input option { background: var(--bg3); }
+.form-textarea { min-height: 120px; resize: vertical; }
+.form-note { font-size: 10px; color: var(--text3); letter-spacing: 0.05em; margin-bottom: 1rem; line-height: 1.6; border-left: 2px solid var(--border2); padding-left: 0.75rem; }
+.form-submit { width: 100%; padding: 12px; background: var(--red); color: #000; border: none; font-family: var(--condensed); font-size: 14px; font-weight: 700; letter-spacing: 0.15em; cursor: pointer; transition: all 0.15s; }
+.form-submit:hover { background: #ff5555; }
+.form-submit:disabled { background: var(--border2); color: var(--text3); cursor: not-allowed; }
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
 .modal-overlay.open { display: flex; }
 .detail-modal { background: var(--bg2); border: 1px solid var(--border2); width: min(620px,100%); max-height: 92vh; overflow-y: auto; animation: modalIn 0.2s ease; }
@@ -286,7 +297,78 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
       <div class="form-modal-title">// SUBMIT INCIDENT REPORT</div>
       <button class="form-modal-close" onclick="closeForm()">✕ CLOSE</button>
     </div>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1vKnUHKXj2uISxYW2L9M6Is3nhAUP_tU8UyC1uRWfT5wQnQ/viewform?embedded=true" frameborder="0">Loading form...</iframe>
+    <div style="overflow-y:auto;flex:1;padding:1.5rem;">
+      <form id="incident-form" action="https://formspree.io/f/xojbdjbq" method="POST">
+        <div class="form-field">
+          <label class="form-label">YOUR NAME OR USERNAME *</label>
+          <input type="text" name="username" class="form-input" placeholder="e.g. anonymous_witness" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">INCIDENT CATEGORY *</label>
+          <select name="category" class="form-input" required>
+            <option value="">— SELECT CATEGORY —</option>
+            <option value="cryptid">CRYPTID</option>
+            <option value="ghost">GHOST</option>
+            <option value="ufo">UFO</option>
+            <option value="alien">ALIEN</option>
+            <option value="unexplained">UNEXPLAINED</option>
+            <option value="demonic">DEMONIC</option>
+            <option value="humanoid">HUMANOID</option>
+            <option value="atmospheric">ATMOSPHERIC</option>
+            <option value="other">OTHER</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">INCIDENT TITLE *</label>
+          <input type="text" name="title" class="form-input" placeholder="e.g. Large winged figure over Chicago" required>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">CITY *</label>
+            <input type="text" name="city" class="form-input" placeholder="e.g. Chicago" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label">STATE *</label>
+            <select name="state" class="form-input" required>
+              <option value="">— STATE —</option>
+              <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+              <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+              <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+              <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+              <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+              <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+              <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+              <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+              <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+              <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+              <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+              <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+              <option>WI</option><option>WY</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">DATE OF INCIDENT *</label>
+          <input type="date" name="date" class="form-input" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">DESCRIBE WHAT HAPPENED *</label>
+          <textarea name="description" class="form-input form-textarea" placeholder="Describe what you saw, heard, or experienced in as much detail as possible..." required></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label">PHOTO LINK (OPTIONAL)</label>
+          <input type="url" name="photo_url" class="form-input" placeholder="Link to any photos (imgur, google drive, etc.)">
+        </div>
+        <div class="form-note">All submissions are reviewed before being published to the map.</div>
+        <button type="submit" class="form-submit" id="form-submit-btn">SUBMIT INCIDENT REPORT</button>
+      </form>
+      <div id="form-success" style="display:none;text-align:center;padding:2rem;">
+        <div style="font-size:32px;margin-bottom:1rem;">📡</div>
+        <div style="font-family:var(--condensed);font-size:20px;font-weight:700;letter-spacing:0.1em;margin-bottom:0.5rem;">REPORT RECEIVED</div>
+        <div style="font-size:11px;color:var(--text2);line-height:1.7;">Thank you for your submission. Your report will be reviewed and added to the map if verified. Stay vigilant.</div>
+        <button onclick="closeForm()" style="margin-top:1.5rem;background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:10px;letter-spacing:0.1em;padding:8px 20px;cursor:pointer;">CLOSE</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -370,6 +452,32 @@ function updateStats() {
   var states = new Set(reports.map(function(r){ return r.state; }));
   document.getElementById('states-count').textContent = states.size;
 }
+
+// ── FORM SUBMIT ──
+document.getElementById('incident-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('form-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'TRANSMITTING...';
+  fetch('https://formspree.io/f/xojbdjbq', {
+    method: 'POST',
+    body: new FormData(this),
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r) {
+    if (r.ok) {
+      document.getElementById('incident-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'SUBMIT INCIDENT REPORT';
+      alert('Submission failed. Please try again.');
+    }
+  }).catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'SUBMIT INCIDENT REPORT';
+    alert('Submission failed. Please try again.');
+  });
+});
 
 // ── FORM ──
 function openForm() {
