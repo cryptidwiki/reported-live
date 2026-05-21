@@ -77,7 +77,7 @@ var reports = [
     date: "2026-04-15",
     description: "Found a track line in mud near the Hoh River that measured 17 inches long and showed a clear bipedal stride of approximately 5 feet. The tracks continued for roughly 200 yards before entering dense forest. I made plaster casts of three of the clearest prints. A wildlife biologist I contacted said they are not consistent with any known animal in the region.",
     reporter: "olympic_peninsula_hiker",
-    image: ""
+    image: "images/track.png"
   },
   {
     id: 6,
