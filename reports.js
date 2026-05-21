@@ -41,7 +41,7 @@ var reports = [
     date: "2026-05-08",
     description: "Seven orange lights in a V formation hovered over the city for approximately 22 minutes before disappearing simultaneously. No sound whatsoever. Hundreds of witnesses. Local news reported it as flares but the lights were stationary and wind was blowing southeast — opposite direction of drift. Video captured on three separate phones.",
     reporter: "phoenix_skywatcher",
-    image: ""
+    image: "images/lights.png"
   },
   {
     id: 3,
