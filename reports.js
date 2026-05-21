@@ -89,7 +89,7 @@ var reports = [
     date: "2026-05-01",
     description: "Driving home on Route 285 at approximately 9pm. Bright light came down ahead of the road. Next thing I knew I was pulled over on the side of the road and it was 2:47am. I have no memory of the intervening six hours. My car has a strange scorch mark on the roof that wasn't there before and I have a small triangular mark on my left forearm that appeared overnight.",
     reporter: "nm_route285_driver",
-    image: ""
+    image: "images/car.png"
   },
   {
     id: 7,
