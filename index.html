@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://reported.live">
 <meta property="og:title" content="Reported.live — Live US Paranormal Incident Map">
-<meta property="og:description" content="Community-powered live map tracking UFO sightings, cryptid encounters, ghost activity and unexplained events across the United States.">
+<meta property="og:description" content="Community-powered live map tracking UFO sightings, cryptid encounters, ghost activity and unexplained events worldwide.">
 <meta property="og:image" content="https://reported.live/images/og-image.jpg">
 
 <!-- Twitter -->
@@ -31,7 +31,7 @@
   "@type": "WebSite",
   "name": "Reported.live",
   "url": "https://reported.live",
-  "description": "Live community map tracking paranormal incidents across the United States including UFO sightings, cryptid encounters, and unexplained events."
+  "description": "Live community map tracking paranormal incidents worldwide including UFO sightings, cryptid encounters, and unexplained events."
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -292,7 +292,7 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
   <div class="header-stats">
     <div class="hstat"><div class="hstat-num amber" id="total-reports">0</div><div class="hstat-label">TOTAL REPORTS</div></div>
     <div class="hstat"><div class="hstat-num red" id="active-month">0</div><div class="hstat-label">THIS MONTH</div></div>
-    <div class="hstat"><div class="hstat-num green" id="states-count">0</div><div class="hstat-label">STATES ACTIVE</div></div>
+    <div class="hstat"><div class="hstat-num green" id="countries-count">0</div><div class="hstat-label">COUNTRIES ACTIVE</div></div>
   </div>
   <button onclick="openForm()" class="report-btn">REPORT INCIDENT</button>
 </header>
@@ -316,7 +316,7 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 <div class="main-layout">
   <div class="map-section">
     <div class="map-header">
-      <span class="map-title">// LIVE INCIDENT HEATMAP — UNITED STATES //</span>
+      <span class="map-title">// LIVE INCIDENT HEATMAP — GLOBAL //</span>
       <span class="map-hint">CLICK A STATE TO FILTER REPORTS</span>
     </div>
     <div id="map-container"></div>
@@ -348,13 +348,13 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
       </div>
       <div class="feed-search-wrap">
         <span class="feed-search-icon">⌕</span>
-        <input type="text" class="feed-search" id="feed-search" placeholder="SEARCH REPORTS, CITIES, STATES...">
+        <input type="text" class="feed-search" id="feed-search" placeholder="SEARCH REPORTS, CITIES, COUNTRIES...">
       </div>
       <select class="feed-sort" id="feed-sort">
         <option value="newest">SORT: NEWEST FIRST</option>
         <option value="oldest">SORT: OLDEST FIRST</option>
         <option value="category">SORT: BY CATEGORY</option>
-        <option value="state">SORT: BY STATE</option>
+        <option value="country">SORT: BY COUNTRY</option>
       </select>
     </div>
     <div class="feed-list" id="feed-list"></div>
@@ -399,23 +399,8 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
             <input type="text" name="city" class="form-input" placeholder="e.g. Chicago" required>
           </div>
           <div class="form-field">
-            <label class="form-label">STATE *</label>
-            <select name="state" class="form-input" required>
-              <option value="">— STATE —</option>
-              <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
-              <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
-              <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
-              <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
-              <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
-              <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
-              <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
-              <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
-              <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
-              <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
-              <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
-              <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
-              <option>WI</option><option>WY</option>
-            </select>
+            <label class="form-label">COUNTRY *</label>
+            <input type="text" name="country" class="form-input" required placeholder="e.g. United States, Italy, United Kingdom...">
           </div>
         </div>
         <div class="form-field">
@@ -462,13 +447,13 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
   <div class="about-header">
     <div class="about-tag">// WHAT IS REPORTED.LIVE //</div>
     <div class="about-title">A Community-Driven Incident Map</div>
-    <p class="about-sub">Reported.Live is a free platform for documenting and sharing unexplained incidents across the United States. Anyone can submit a report — every pin on the map is a real community submission.</p>
+    <p class="about-sub">Reported.Live is a free global platform for documenting and sharing unexplained incidents from anywhere in the world. Anyone can submit a report — every pin on the map is a real community submission.</p>
   </div>
   <div class="about-grid">
     <div class="about-card">
       <div class="about-card-icon">🗺️</div>
       <div class="about-card-title">THE MAP</div>
-      <div class="about-card-text">States glow brighter the more reports they have. Click any state to filter the feed to only that state's incidents. The darker the state, the quieter it is.</div>
+      <div class="about-card-text">Countries glow brighter the more reports they have. Click any country to filter the feed to that country's incidents. The darker the country, the quieter it is.</div>
     </div>
     <div class="about-card">
       <div class="about-card-icon">📡</div>
@@ -540,7 +525,7 @@ var stateNames = {
 function buildTicker() {
   var sorted = reports.slice().sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
   var text = sorted.map(function(r){
-    return 'NEW: ' + r.category.toUpperCase() + ' — ' + r.city + ', ' + r.state;
+    return 'NEW: ' + r.category.toUpperCase() + ' — ' + r.city + ', ' + r.country;
   }).join(' &nbsp;///&nbsp; ') + ' &nbsp;///&nbsp; ';
   var doubled = text + text;
   document.querySelectorAll('.alert-bar-text').forEach(function(el){
@@ -567,7 +552,7 @@ function updateStats() {
     return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
   }).length;
   document.getElementById('active-month').textContent = thisMonth;
-  var states = new Set(reports.map(function(r){ return r.state; }));
+  var states = new Set(reports.map(function(r){ return r.country; }));
   document.getElementById('states-count').textContent = states.size;
 }
 
@@ -628,22 +613,22 @@ document.getElementById('feed-sort').addEventListener('change', function(){
 function getFiltered() {
   var list = reports;
   if (activeFilter !== 'all') list = list.filter(function(r){ return r.category === activeFilter; });
-  if (activeState) list = list.filter(function(r){ return r.state === activeState; });
+  if (activeState) list = list.filter(function(r){ return r.country === activeState; });
   if (searchQuery) list = list.filter(function(r){
     return (r.title||'').toLowerCase().includes(searchQuery)
       || (r.description||'').toLowerCase().includes(searchQuery)
       || (r.city||'').toLowerCase().includes(searchQuery)
-      || (r.state||'').toLowerCase().includes(searchQuery)
+      || (r.country||'').toLowerCase().includes(searchQuery)
       || (r.category||'').toLowerCase().includes(searchQuery);
   });
   return list;
 }
 
-// ── COUNTS PER STATE ──
+// ── COUNTS PER COUNTRY ──
 function getStateCounts() {
   var counts = {};
   var list = activeFilter === 'all' ? reports : reports.filter(function(r){ return r.category === activeFilter; });
-  list.forEach(function(r){ counts[r.state] = (counts[r.state]||0) + 1; });
+  list.forEach(function(r){ counts[r.country] = (counts[r.country]||0) + 1; });
   return counts;
 }
 
@@ -668,68 +653,89 @@ function initMap() {
   svg.append('line').attr('x1',0).attr('y1',h/2).attr('x2',w).attr('y2',h/2).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
   svg.append('line').attr('x1',w/2).attr('y1',0).attr('x2',w/2).attr('y2',h).attr('stroke','#0d1520').attr('stroke-width','0.5').attr('stroke-dasharray','4,8');
 
-  projection = d3.geoAlbersUsa().scale(1280).translate([w/2, h/2]);
+  projection = d3.geoNaturalEarth1().scale(w/6.5).translate([w/2, h/2]);
   var path = d3.geoPath().projection(projection);
   var tooltip = document.getElementById('state-tooltip');
 
-  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
-    .then(function(r){ return r.json(); })
-    .then(function(us) {
-      var statesGeo = topojson.feature(us, us.objects.states);
+  var idToName = {
+    '004':'Afghanistan','008':'Albania','012':'Algeria','024':'Angola','032':'Argentina',
+    '036':'Australia','040':'Austria','031':'Azerbaijan','050':'Bangladesh','056':'Belgium',
+    '068':'Bolivia','070':'Bosnia','076':'Brazil','100':'Bulgaria','104':'Myanmar',
+    '116':'Cambodia','120':'Cameroon','124':'Canada','152':'Chile','156':'China',
+    '170':'Colombia','180':'Congo','191':'Croatia','196':'Cyprus','203':'Czech Republic',
+    '208':'Denmark','218':'Ecuador','818':'Egypt','231':'Ethiopia','246':'Finland',
+    '250':'France','266':'Gabon','276':'Germany','288':'Ghana','300':'Greece',
+    '320':'Guatemala','324':'Guinea','332':'Haiti','348':'Hungary','356':'India',
+    '360':'Indonesia','364':'Iran','368':'Iraq','372':'Ireland','376':'Israel',
+    '380':'Italy','388':'Jamaica','392':'Japan','400':'Jordan','398':'Kazakhstan',
+    '404':'Kenya','417':'Kyrgyzstan','418':'Laos','422':'Lebanon','430':'Liberia',
+    '434':'Libya','440':'Lithuania','442':'Luxembourg','450':'Madagascar','454':'Malawi',
+    '458':'Malaysia','466':'Mali','484':'Mexico','496':'Mongolia','504':'Morocco',
+    '508':'Mozambique','516':'Namibia','524':'Nepal','528':'Netherlands','554':'New Zealand',
+    '562':'Niger','566':'Nigeria','578':'Norway','512':'Oman','586':'Pakistan',
+    '591':'Panama','604':'Peru','608':'Philippines','616':'Poland','620':'Portugal',
+    '630':'Puerto Rico','634':'Qatar','642':'Romania','643':'Russia','646':'Rwanda',
+    '682':'Saudi Arabia','686':'Senegal','694':'Sierra Leone','703':'Slovakia',
+    '706':'Somalia','710':'South Africa','724':'Spain','144':'Sri Lanka','729':'Sudan',
+    '752':'Sweden','756':'Switzerland','760':'Syria','762':'Tajikistan','764':'Thailand',
+    '768':'Togo','780':'Trinidad','788':'Tunisia','792':'Turkey','800':'Uganda',
+    '804':'Ukraine','784':'UAE','826':'United Kingdom','840':'United States',
+    '858':'Uruguay','860':'Uzbekistan','704':'Vietnam','887':'Yemen',
+    '894':'Zambia','716':'Zimbabwe'
+  };
 
-      // Draw states
-      svg.selectAll('.state')
-        .data(statesGeo.features)
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(function(r){ return r.json(); })
+    .then(function(world) {
+      var countries = topojson.feature(world, world.objects.countries);
+
+      svg.selectAll('.state-path')
+        .data(countries.features)
         .enter()
         .append('path')
         .attr('class', 'state-path')
         .attr('d', path)
         .attr('fill', '#0a1220')
         .attr('stroke', '#1a2840')
-        .attr('stroke-width', 0.5)
+        .attr('stroke-width', 0.4)
         .attr('cursor', 'pointer')
         .on('mousemove', function(event, d) {
-          var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
+          var name = idToName[String(d.id).padStart(3,'0')];
+          if (!name) return;
           var counts = getStateCounts();
-          var count = counts[abbr] || 0;
+          var count = counts[name] || 0;
           var mapSection = document.querySelector('.map-section');
           var rect = mapSection.getBoundingClientRect();
           tooltip.style.display = 'block';
           tooltip.style.left = (event.clientX - rect.left + 12) + 'px';
           tooltip.style.top = (event.clientY - rect.top - 10) + 'px';
-          tooltip.innerHTML = '<strong>' + (stateNames[abbr]||abbr) + '</strong> &nbsp;—&nbsp; '
+          tooltip.innerHTML = '<strong>' + name + '</strong> &nbsp;—&nbsp; '
             + (count > 0
               ? '<span style="color:var(--red)">' + count + ' REPORT' + (count!==1?'S':'') + '</span>'
               : '<span style="color:var(--text3)">NO REPORTS</span>');
         })
-        .on('mouseleave', function() {
-          tooltip.style.display = 'none';
-        })
+        .on('mouseleave', function() { tooltip.style.display = 'none'; })
         .on('click', function(event, d) {
-          var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
-          if (!abbr) return;
-          if (activeState === abbr) {
+          var name = idToName[String(d.id).padStart(3,'0')];
+          if (!name) return;
+          if (activeState === name) {
             clearStateFilter();
           } else {
-            activeState = abbr;
+            activeState = name;
             updateHeatmap();
             renderFeed();
             document.getElementById('feed-list').scrollTop = 0;
             var banner = document.getElementById('state-banner');
             var counts = getStateCounts();
-            var count = counts[abbr] || 0;
+            var count = counts[name] || 0;
             banner.style.display = 'block';
-            banner.textContent = '📍 ' + (stateNames[abbr]||abbr).toUpperCase() + ' — ' + count + ' REPORT' + (count!==1?'S':'') + ' — CLICK TO CLEAR';
+            banner.textContent = '📍 ' + name.toUpperCase() + ' — ' + count + ' REPORT' + (count!==1?'S':'') + ' — CLICK TO CLEAR';
           }
         });
 
-      // Draw borders
       svg.append('path')
-        .datum(topojson.mesh(us, us.objects.states, function(a,b){ return a!==b; }))
-        .attr('fill','none')
-        .attr('stroke','#1a2840')
-        .attr('stroke-width',0.5)
-        .attr('d', path);
+        .datum(topojson.mesh(world, world.objects.countries, function(a,b){ return a!==b; }))
+        .attr('fill','none').attr('stroke','#1a2840').attr('stroke-width',0.4).attr('d', path);
 
       updateHeatmap();
     });
@@ -740,33 +746,51 @@ function updateHeatmap() {
   var values = Object.values(counts).filter(function(v){ return v > 0; });
   var maxCount = Math.max(1, d3.max(values) || 1);
 
+  var idToName = {
+    '004':'Afghanistan','008':'Albania','012':'Algeria','024':'Angola','032':'Argentina',
+    '036':'Australia','040':'Austria','031':'Azerbaijan','050':'Bangladesh','056':'Belgium',
+    '068':'Bolivia','070':'Bosnia','076':'Brazil','100':'Bulgaria','104':'Myanmar',
+    '116':'Cambodia','120':'Cameroon','124':'Canada','152':'Chile','156':'China',
+    '170':'Colombia','180':'Congo','191':'Croatia','196':'Cyprus','203':'Czech Republic',
+    '208':'Denmark','218':'Ecuador','818':'Egypt','231':'Ethiopia','246':'Finland',
+    '250':'France','266':'Gabon','276':'Germany','288':'Ghana','300':'Greece',
+    '320':'Guatemala','324':'Guinea','332':'Haiti','348':'Hungary','356':'India',
+    '360':'Indonesia','364':'Iran','368':'Iraq','372':'Ireland','376':'Israel',
+    '380':'Italy','392':'Japan','400':'Jordan','398':'Kazakhstan','404':'Kenya',
+    '418':'Laos','422':'Lebanon','430':'Liberia','434':'Libya','440':'Lithuania',
+    '450':'Madagascar','454':'Malawi','458':'Malaysia','466':'Mali','484':'Mexico',
+    '496':'Mongolia','504':'Morocco','508':'Mozambique','516':'Namibia','524':'Nepal',
+    '528':'Netherlands','554':'New Zealand','562':'Niger','566':'Nigeria','578':'Norway',
+    '512':'Oman','586':'Pakistan','591':'Panama','604':'Peru','608':'Philippines',
+    '616':'Poland','620':'Portugal','634':'Qatar','642':'Romania','643':'Russia',
+    '646':'Rwanda','682':'Saudi Arabia','686':'Senegal','703':'Slovakia','706':'Somalia',
+    '710':'South Africa','724':'Spain','144':'Sri Lanka','729':'Sudan','752':'Sweden',
+    '756':'Switzerland','760':'Syria','764':'Thailand','768':'Togo','788':'Tunisia',
+    '792':'Turkey','800':'Uganda','804':'Ukraine','784':'UAE','826':'United Kingdom',
+    '840':'United States','858':'Uruguay','704':'Vietnam','887':'Yemen',
+    '894':'Zambia','716':'Zimbabwe'
+  };
+
   d3.selectAll('.state-path').attr('fill', function(d) {
-    var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
-    var count = counts[abbr] || 0;
-    var isSelected = activeState && activeState === abbr;
-
-    // Selected state — amber highlight
+    var name = idToName[String(d.id).padStart(3,'0')];
+    var count = counts[name] || 0;
+    var isSelected = activeState && activeState === name;
     if (isSelected) return 'rgba(255,170,0,0.3)';
-
-    // No reports — stay dark
     if (count === 0) return '#0a1220';
-
-    // Scale from dim orange to bright red based on intensity
     var intensity = count / maxCount;
     if (intensity < 0.33) return 'rgba(255,100,0,0.25)';
     if (intensity < 0.66) return 'rgba(255,60,0,0.45)';
     return 'rgba(255,30,0,0.70)';
-
   }).attr('stroke', function(d) {
-    var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
-    var isSelected = activeState && activeState === abbr;
-    var count = (getStateCounts()[abbr] || 0);
+    var name = idToName[String(d.id).padStart(3,'0')];
+    var isSelected = activeState && activeState === name;
+    var count = counts[name] || 0;
     if (isSelected) return 'rgba(255,170,0,0.9)';
     if (count > 0) return 'rgba(255,80,0,0.4)';
     return '#1a2840';
   }).attr('stroke-width', function(d) {
-    var abbr = fipsToState[d.id] || fipsToState[String(d.id).padStart(2,'0')];
-    return (activeState && activeState === abbr) ? 1.5 : 0.5;
+    var name = idToName[String(d.id).padStart(3,'0')];
+    return (activeState && activeState === name) ? 1.5 : 0.4;
   });
 }
 
@@ -831,7 +855,7 @@ function renderFeed() {
       + '<span class="feed-cat" style="color:' + color + '">' + r.category.toUpperCase() + '</span>'
       + '<span class="feed-date">' + dateStr + '</span>'
       + '</div>'
-      + '<div class="feed-location">📍 ' + r.city + ', ' + r.state + '</div>'
+      + '<div class="feed-location">📍 ' + r.city + ', ' + r.country + '</div>'
       + (r.image ? '<img class="feed-img" src="' + r.image + '" alt="sighting photo">' : '')
       + '<div class="feed-desc">' + r.description + '</div>'
       + '</div>'
@@ -853,10 +877,10 @@ function openDetail(id) {
       ? '<div class="detail-img-wrap"><img class="detail-img" src="' + r.image + '" alt="sighting" onclick="openLightbox(\'' + r.image + '\')"><div class="detail-img-expand">🔍 CLICK TO EXPAND</div></div>'
       : '')
     + '<div class="detail-body">'
-    + '<div class="detail-cat" style="color:' + color + '">' + r.category.toUpperCase() + ' INCIDENT — ' + r.state + '</div>'
-    + '<div class="detail-title">' + (r.title||r.city+', '+r.state) + '</div>'
+    + '<div class="detail-cat" style="color:' + color + '">' + r.category.toUpperCase() + ' INCIDENT — ' + r.country + '</div>'
+    + '<div class="detail-title">' + (r.title||r.city+', '+r.country) + '</div>'
     + '<div class="detail-meta">'
-    + '<div><div class="detail-meta-label">LOCATION</div><div class="detail-meta-val">📍 ' + r.city + ', ' + r.state + '</div></div>'
+    + '<div><div class="detail-meta-label">LOCATION</div><div class="detail-meta-val">📍 ' + r.city + ', ' + r.country + '</div></div>'
     + '<div><div class="detail-meta-label">DATE</div><div class="detail-meta-val">' + dateStr + '</div></div>'
     + '<div><div class="detail-meta-label">FILED BY</div><div class="detail-meta-val">' + (r.reporter||'ANONYMOUS') + '</div></div>'
     + '</div>'
