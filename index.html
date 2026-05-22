@@ -656,32 +656,33 @@ function initMap() {
   projection = d3.geoNaturalEarth1().scale(w/6.5).translate([w/2, h/2]);
   var path = d3.geoPath().projection(projection);
   var tooltip = document.getElementById('state-tooltip');
-
   var idToName = {
     '004':'Afghanistan','008':'Albania','012':'Algeria','024':'Angola','032':'Argentina',
     '036':'Australia','040':'Austria','031':'Azerbaijan','050':'Bangladesh','056':'Belgium',
-    '068':'Bolivia','070':'Bosnia','076':'Brazil','100':'Bulgaria','104':'Myanmar',
-    '116':'Cambodia','120':'Cameroon','124':'Canada','152':'Chile','156':'China',
-    '170':'Colombia','180':'Congo','191':'Croatia','196':'Cyprus','203':'Czech Republic',
-    '208':'Denmark','218':'Ecuador','818':'Egypt','231':'Ethiopia','246':'Finland',
-    '250':'France','266':'Gabon','276':'Germany','288':'Ghana','300':'Greece',
-    '320':'Guatemala','324':'Guinea','332':'Haiti','348':'Hungary','356':'India',
-    '360':'Indonesia','364':'Iran','368':'Iraq','372':'Ireland','376':'Israel',
-    '380':'Italy','388':'Jamaica','392':'Japan','400':'Jordan','398':'Kazakhstan',
-    '404':'Kenya','417':'Kyrgyzstan','418':'Laos','422':'Lebanon','430':'Liberia',
-    '434':'Libya','440':'Lithuania','442':'Luxembourg','450':'Madagascar','454':'Malawi',
-    '458':'Malaysia','466':'Mali','484':'Mexico','496':'Mongolia','504':'Morocco',
-    '508':'Mozambique','516':'Namibia','524':'Nepal','528':'Netherlands','554':'New Zealand',
-    '562':'Niger','566':'Nigeria','578':'Norway','512':'Oman','586':'Pakistan',
-    '591':'Panama','604':'Peru','608':'Philippines','616':'Poland','620':'Portugal',
-    '630':'Puerto Rico','634':'Qatar','642':'Romania','643':'Russia','646':'Rwanda',
-    '682':'Saudi Arabia','686':'Senegal','694':'Sierra Leone','703':'Slovakia',
-    '706':'Somalia','710':'South Africa','724':'Spain','144':'Sri Lanka','729':'Sudan',
-    '752':'Sweden','756':'Switzerland','760':'Syria','762':'Tajikistan','764':'Thailand',
-    '768':'Togo','780':'Trinidad','788':'Tunisia','792':'Turkey','800':'Uganda',
-    '804':'Ukraine','784':'UAE','826':'United Kingdom','840':'United States',
-    '858':'Uruguay','860':'Uzbekistan','704':'Vietnam','887':'Yemen',
-    '894':'Zambia','716':'Zimbabwe'
+    '064':'Bhutan','068':'Bolivia','070':'Bosnia and Herzegovina','076':'Brazil',
+    '100':'Bulgaria','104':'Myanmar','116':'Cambodia','120':'Cameroon','124':'Canada',
+    '144':'Sri Lanka','152':'Chile','156':'China','170':'Colombia','180':'Dem. Rep. Congo',
+    '191':'Croatia','196':'Cyprus','203':'Czech Republic','208':'Denmark','218':'Ecuador',
+    '818':'Egypt','231':'Ethiopia','246':'Finland','250':'France','276':'Germany',
+    '288':'Ghana','300':'Greece','320':'Guatemala','332':'Haiti','348':'Hungary',
+    '356':'India','360':'Indonesia','364':'Iran','368':'Iraq','372':'Ireland',
+    '376':'Israel','380':'Italy','392':'Japan','400':'Jordan','398':'Kazakhstan',
+    '404':'Kenya','408':'North Korea','410':'South Korea','418':'Laos','422':'Lebanon',
+    '430':'Liberia','434':'Libya','440':'Lithuania','450':'Madagascar','454':'Malawi',
+    '458':'Malaysia','484':'Mexico','496':'Mongolia','504':'Morocco','508':'Mozambique',
+    '516':'Namibia','524':'Nepal','528':'Netherlands','554':'New Zealand','562':'Niger',
+    '566':'Nigeria','578':'Norway','512':'Oman','586':'Pakistan','591':'Panama',
+    '604':'Peru','608':'Philippines','616':'Poland','620':'Portugal','634':'Qatar',
+    '642':'Romania','643':'Russia','646':'Rwanda','682':'Saudi Arabia','686':'Senegal',
+    '694':'Sierra Leone','703':'Slovakia','706':'Somalia','710':'South Africa',
+    '724':'Spain','729':'Sudan','752':'Sweden','756':'Switzerland','760':'Syria',
+    '762':'Tajikistan','764':'Thailand','768':'Togo','788':'Tunisia','792':'Turkey',
+    '800':'Uganda','804':'Ukraine','784':'United Arab Emirates','826':'United Kingdom',
+    '840':'United States','858':'Uruguay','860':'Uzbekistan','704':'Vietnam',
+    '887':'Yemen','894':'Zambia','716':'Zimbabwe','466':'Mali','478':'Mauritania',
+    '072':'Botswana','140':'Central African Republic','148':'Chad','178':'Republic of Congo',
+    '266':'Gabon','226':'Equatorial Guinea','324':'Guinea','624':'Guinea-Bissau',
+    '384':'Ivory Coast','204':'Benin'
   };
 
   fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
@@ -745,30 +746,33 @@ function updateHeatmap() {
   var counts = getStateCounts();
   var values = Object.values(counts).filter(function(v){ return v > 0; });
   var maxCount = Math.max(1, d3.max(values) || 1);
-
   var idToName = {
     '004':'Afghanistan','008':'Albania','012':'Algeria','024':'Angola','032':'Argentina',
     '036':'Australia','040':'Austria','031':'Azerbaijan','050':'Bangladesh','056':'Belgium',
-    '068':'Bolivia','070':'Bosnia','076':'Brazil','100':'Bulgaria','104':'Myanmar',
-    '116':'Cambodia','120':'Cameroon','124':'Canada','152':'Chile','156':'China',
-    '170':'Colombia','180':'Congo','191':'Croatia','196':'Cyprus','203':'Czech Republic',
-    '208':'Denmark','218':'Ecuador','818':'Egypt','231':'Ethiopia','246':'Finland',
-    '250':'France','266':'Gabon','276':'Germany','288':'Ghana','300':'Greece',
-    '320':'Guatemala','324':'Guinea','332':'Haiti','348':'Hungary','356':'India',
-    '360':'Indonesia','364':'Iran','368':'Iraq','372':'Ireland','376':'Israel',
-    '380':'Italy','392':'Japan','400':'Jordan','398':'Kazakhstan','404':'Kenya',
-    '418':'Laos','422':'Lebanon','430':'Liberia','434':'Libya','440':'Lithuania',
-    '450':'Madagascar','454':'Malawi','458':'Malaysia','466':'Mali','484':'Mexico',
-    '496':'Mongolia','504':'Morocco','508':'Mozambique','516':'Namibia','524':'Nepal',
-    '528':'Netherlands','554':'New Zealand','562':'Niger','566':'Nigeria','578':'Norway',
-    '512':'Oman','586':'Pakistan','591':'Panama','604':'Peru','608':'Philippines',
-    '616':'Poland','620':'Portugal','634':'Qatar','642':'Romania','643':'Russia',
-    '646':'Rwanda','682':'Saudi Arabia','686':'Senegal','703':'Slovakia','706':'Somalia',
-    '710':'South Africa','724':'Spain','144':'Sri Lanka','729':'Sudan','752':'Sweden',
-    '756':'Switzerland','760':'Syria','764':'Thailand','768':'Togo','788':'Tunisia',
-    '792':'Turkey','800':'Uganda','804':'Ukraine','784':'UAE','826':'United Kingdom',
-    '840':'United States','858':'Uruguay','704':'Vietnam','887':'Yemen',
-    '894':'Zambia','716':'Zimbabwe'
+    '064':'Bhutan','068':'Bolivia','070':'Bosnia and Herzegovina','076':'Brazil',
+    '100':'Bulgaria','104':'Myanmar','116':'Cambodia','120':'Cameroon','124':'Canada',
+    '144':'Sri Lanka','152':'Chile','156':'China','170':'Colombia','180':'Dem. Rep. Congo',
+    '191':'Croatia','196':'Cyprus','203':'Czech Republic','208':'Denmark','218':'Ecuador',
+    '818':'Egypt','231':'Ethiopia','246':'Finland','250':'France','276':'Germany',
+    '288':'Ghana','300':'Greece','320':'Guatemala','332':'Haiti','348':'Hungary',
+    '356':'India','360':'Indonesia','364':'Iran','368':'Iraq','372':'Ireland',
+    '376':'Israel','380':'Italy','392':'Japan','400':'Jordan','398':'Kazakhstan',
+    '404':'Kenya','408':'North Korea','410':'South Korea','418':'Laos','422':'Lebanon',
+    '430':'Liberia','434':'Libya','440':'Lithuania','450':'Madagascar','454':'Malawi',
+    '458':'Malaysia','484':'Mexico','496':'Mongolia','504':'Morocco','508':'Mozambique',
+    '516':'Namibia','524':'Nepal','528':'Netherlands','554':'New Zealand','562':'Niger',
+    '566':'Nigeria','578':'Norway','512':'Oman','586':'Pakistan','591':'Panama',
+    '604':'Peru','608':'Philippines','616':'Poland','620':'Portugal','634':'Qatar',
+    '642':'Romania','643':'Russia','646':'Rwanda','682':'Saudi Arabia','686':'Senegal',
+    '694':'Sierra Leone','703':'Slovakia','706':'Somalia','710':'South Africa',
+    '724':'Spain','729':'Sudan','752':'Sweden','756':'Switzerland','760':'Syria',
+    '762':'Tajikistan','764':'Thailand','768':'Togo','788':'Tunisia','792':'Turkey',
+    '800':'Uganda','804':'Ukraine','784':'United Arab Emirates','826':'United Kingdom',
+    '840':'United States','858':'Uruguay','860':'Uzbekistan','704':'Vietnam',
+    '887':'Yemen','894':'Zambia','716':'Zimbabwe','466':'Mali','478':'Mauritania',
+    '072':'Botswana','140':'Central African Republic','148':'Chad','178':'Republic of Congo',
+    '266':'Gabon','226':'Equatorial Guinea','324':'Guinea','624':'Guinea-Bissau',
+    '384':'Ivory Coast','204':'Benin'
   };
 
   d3.selectAll('.state-path').attr('fill', function(d) {
@@ -917,15 +921,14 @@ document.addEventListener('keydown', function(e){
   if (e.key==='Escape'){ closeDetail(); closeLightbox(); closeForm(); }
 });
 
-// ── INIT ──
+// ── INIT — render feed immediately, map when topojs loads ──
+updateStats();
+renderFeed();
+buildTicker();
+
 var topoScript = document.createElement('script');
 topoScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js';
-topoScript.onload = function() {
-  initMap();
-  updateStats();
-  renderFeed();
-  buildTicker();
-};
+topoScript.onload = function() { initMap(); };
 document.head.appendChild(topoScript);
 </script>
 </body>
