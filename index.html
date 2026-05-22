@@ -528,7 +528,7 @@ function updateStats() {
   }).length;
   document.getElementById('active-month').textContent = thisMonth;
   var states = new Set(reports.map(function(r){ return r.country; }));
-  document.getElementById('states-count').textContent = states.size;
+  document.getElementById('countries-count').textContent = states.size;
 }
 
 // ── FORM SUBMIT ──
